@@ -1,58 +1,128 @@
+<h1 align="center"> Sarthi - Your Pathway to Expert Assistance </h1>
 
+<div align="center">
 
-# Sarthi 
+<i>Sarthi is an innovative online platform designed to bridge the gap between junior novices and seasoned experts across various industries. Whether you're a student looking for guidance, a budding professional seeking career advice, or an individual encountering technical hurdles, Sarthi is here to connect you with experienced mentors from around the globe.</i>
 
-'Sarthi' is a simple online platform (website) for junior novices (students/industry juniors) to connect and get their problems solved from the seniors or experts all over the world, via 'Sarthi' juniors will have following sections to get the assistance from seniors : a) bug solving , b) tech carrier assistance , c) academic support .Currently 'Sarthi' is on the ideation level and this is the additional benefit for  webD beginners to building it from scratch.
+</div>
 
-## Required tech-stack :
-- React.js
-- Node.js
-- Express.js
-- MongoDb
+<div align="center">
 
-## Step-by-step building guide : 
+## 💻 Tech Stacks
 
-#### Note : ( for each step write frontend,backend code store data in DB and then move forward to the next step )
+<img src="https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB">&nbsp;&nbsp;<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white">
 
-## Step 1 :
+</div>
 
-#### create a login , signup pages for juniors and seniors
-- data to get from juniors/students :   name,email, phone
-- data to get from juniors/students : name,expertise, field, college, job title
+<h2 align="center"> -> Key Features <- </h2>
 
-## Step 2 : 
+- **Bug Solving**
+   Encountered a stubborn bug in your code that's impeding your progress? Fear not! With Sarthi, you can seek assistance from experienced developers who can help you troubleshoot and debug your code efficiently.
 
-#### after junior/student's login he must get 3 fields to choose : 
-- bug solving 
-- tech carrier assistance 
-- academic support
+- **Tech Career Assistance**
+   Navigating the complex landscape of a tech career can be daunting, especially for beginners. Sarthi provides a platform where you can seek guidance on career paths, skill development, job opportunities, and industry insights from seasoned professionals.
 
-## Step 3 :
+- **Academic Support**
+   Struggling with a challenging academic concept or assignment? Sarthi offers a supportive environment where you can connect with knowledgeable individuals who can provide clarity, guidance, and assistance with your academic endeavors.
 
-- list all the experts/seniors who have registered on the website with their detailed info
+## Step-by-step building guide:
 
-* Note : get the data of registered experts/seniors from DB
+>Note: For each step write frontend, backend code, store data in DB, and then move forward to the next step
 
-## Step 4 : (chats)
+## Step 1:
 
-- create a chatting functionality for selected expert and the junior
-* Note : here they will discuss about the problem and the amount of fees required to solve the problem
+#### Create login and signup pages for juniors and seniors
+- **Data to get from juniors/students:** name, email, phone
+- **Data to get from seniors/experts:** name, expertise, field, college, job title
 
-## Step 5 : (payment gateway)
+### Frontend:
+- Create login and signup UI pages for juniors and seniors
+- Include form fields to capture required data
+- Implement form validation for input fields
 
-- integrate payment gateway for pre-payment
+### Backend:
+- Create endpoints for user authentication (login and signup) for both juniors and seniors
+- Implement validation and authentication logic
+- Store user data in the database
 
-## Step 6 : (meet)
+### Database:
+- Design database schema to store user information (juniors and seniors)
+- Create tables for juniors and seniors with appropriate fields
 
-- provide them with an option to conduct online meet to solve the problem
+## Step 2:
 
-## Step 7 :
+#### After junior/student's login, they must get 3 fields to choose:
+- Bug solving
+- Tech career assistance
+- Academic support
 
-- get the final payment and feedback  from junior
+### Frontend:
+- Implement UI for the selection of assistance fields after junior login
+
+### Backend:
+- Update the user profile to include the selected assistance fields
+- Handle user preferences and choices in the backend
+
+## Step 3:
+
+- List all the experts/seniors who have registered on the website with their detailed info
+
+>Note: Get the data of registered experts/seniors from the DB
+
+### Frontend:
+- Create a page to display a list of registered experts/seniors with their details
+
+### Backend:
+- Implement logic to fetch and retrieve registered experts/seniors from the database
+
+## Step 4: (Chats)
+
+- Create a chatting functionality for selected expert and the junior
+>Note: Here they will discuss the problem and the amount of fees required to solve the problem
+
+### Frontend:
+- Implement a chat interface for communication between juniors and selected experts
+
+### Backend:
+- Develop WebSocket or HTTP endpoints to handle real-time messaging between users
+- Store chat messages in the database for future reference
+
+## Step 5: (Payment Gateway)
+
+- Integrate a payment gateway for pre-payment
+
+### Frontend:
+- Implement UI for initiating payment for expert assistance
+
+### Backend:
+- Integrate payment gateway APIs for processing payments
+- Handle payment status and update user profiles accordingly
+
+## Step 6: (Meet)
+
+- Provide them with an option to conduct an online meeting to solve the problem
+
+### Frontend:
+- Implement UI for scheduling and conducting online meetings between juniors and experts
+
+### Backend:
+- Develop functionality for scheduling and managing online meetings
+- Integrate video conferencing APIs for real-time communication
+
+## Step 7:
+
+- Get the final payment and feedback from the junior
+
+### Frontend:
+- Implement UI for confirming final payment and collecting feedback from juniors
+
+### Backend:
+- Handle payment confirmation and feedback submission logic
+- Update user profiles and records based on payment completion and feedback
 
 ## Installation
 
-### To get started with Algo-Media, follow these steps:
+### To get started with Sarthi, follow these steps:
 
 1 . Clone the repository :
 
@@ -81,4 +151,18 @@ npm install
 npm run dev
 ```
 
-This will launch the application in your default web browser. You can access it at http://localhost:5173
+This will launch the application in your default web browser.
+>You can access it at http://localhost:5173
+
+<div>
+ 
+<h2 align = "center">Our Contributors ❤️</h2>
+<div align = "center">
+ <h3>Thank you for contributing to our repository</h3>
+
+![Contributors](https://contrib.rocks/image?repo=samarthhapse/sarthi)
+
+### Show some ❤️ by starring this awesome repository!
+
+</div>
+
