@@ -1,34 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Landing } from './components/landing/Landing'
+import { StudentHome } from './components/home/StudentHome';
+import { StudentSignup } from './components/student/StudentSignup';
+import { StudentLogin } from './components/student/StudentLogin';
+import { StudentForget } from './components/student/StudentForget';
+import { ExpertHome } from './components/home/ExpertHome';
+import { ExpertSignup } from './components/expert/ExpertSignup';
+import { ExpertLogin } from './components/expert/ExpertLogin';
+import { ExpertForget } from './components/expert/ExpertForget';
+
+
+
+
+
+
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter >
+       <Routes>
+          <Route path='/' element={<Landing />}/>
+          <Route path='/studenthome' element={<StudentHome /> } />
+          <Route path='/experthome' element={<ExpertHome/>}/>
+          <Route path='/studentsignup' element={<StudentSignup/> }/>
+          <Route path='/studentlogin' element={< StudentLogin/>} />
+          <Route path='/studentforget' element={<StudentForget/>} />
+          <Route path='/expertsignup' element={<ExpertSignup/>}/>
+          <Route path='/expertlogin' element={<ExpertLogin/>}/>
+          <Route path='/expertforget' element={<ExpertForget/>} />
+       </Routes>
+    </BrowserRouter>
   )
 }
 
