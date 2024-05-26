@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+
 const isAuthenticated = async(req,res,next) => {
   try {
     const token=req.header('Authorization');
@@ -6,7 +7,7 @@ const isAuthenticated = async(req,res,next) => {
         return res.status(401).json({message:"User not authenticated.",success:false})
     };
     const jwtToken=token.replace("Bearer","").trim();
-    const decode = await jwt.verify(jwtToken,process.env.JWT_SECRET_KEY);
+    const decode = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
     if(!decode){
         return res.status(401).json({message:"Invalid token",success:false});
     };

@@ -9,6 +9,7 @@ export const register = async (req, res) => {
       let user,checkExpert;
 
       const { name, email, phoneNo, password, confirmPassword } = req.body;
+
       if (!name || !email || !password || !phoneNo || !confirmPassword) {
          return res.status(400).json({ message: "All fields are required", success: false });
       }
@@ -21,12 +22,14 @@ export const register = async (req, res) => {
          return res.status(400).json({ message: "Email already exist, try different email", success: false });
       }
       const hashedPassword = await bcrypt.hash(password, 10);
-      user =await Student.create({
+
+      user = await Student.create({
          name,
          email,
          phoneNo,
          password: hashedPassword
       })
+      
       if (!user) {
          return res.status(500).json({ message: "internal server error", success: false })
       }
@@ -65,7 +68,7 @@ export const login = async (req, res) => {
          userId: user._id
       };
 
-      const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
+      const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, { expiresIn: '1d' });
 
       if (!token) {
          return res.status(500).json({ message: "internal server error", success: false })
