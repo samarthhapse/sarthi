@@ -34,6 +34,10 @@ body {
   min-height: 100vh;
 }
 
+.pre{
+  background-color: #213547;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
