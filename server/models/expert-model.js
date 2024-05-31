@@ -23,13 +23,10 @@ const expertsModel=new mongoose.Schema({
     },
     expertise: {
         type: String,
+        enum:['Bug solving','Tech career assistance','Academic support'],
         required: true
       },
       field: {
-        type: String,
-        required: true
-      },
-      college: {
         type: String,
         required: true
       },

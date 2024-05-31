@@ -45,7 +45,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
 
-   try {
+    try {
       const { email, password } = req.body;
       if (!email || !password) {
          return res.status(400).json({ message: "All fields are required", success: false });
@@ -84,7 +84,15 @@ export const login = async (req, res) => {
 export const changePassword = async (req, res) => {
 
    try {
-      const { email, current_password, new_password } = req.body;
+      const { email, current_password, new_password,confirm_new_password } = req.body;
+
+      if(new_password!==confirm_new_password)
+         {
+            return res.status(400).json({
+               message: "Confirm password do not match.",
+               success: false
+            })
+         }
       const user = await Student.findOne({ email })
       if (!user) {
          return res.status(400).json({ message: "No user found!", success: false });
