@@ -2,12 +2,13 @@ import { Expert } from "../models/expert-model.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { Student } from "../models/student-model.js";
+import OTP from "../models/otp-model.js";
 
 export const register = async (req, res) => {
     
      try {
         let user,checkStudent;
-        const { name, email, phoneNo, expertise, field, jobTitle, password, confirmPassword } = req.body;
+        const { name, email, phoneNo, expertise, field, jobTitle, password, confirmPassword,otp} = req.body;
         if (!name || !password || !confirmPassword || !phoneNo || !expertise || !field || !jobTitle) {
             return res.status(400).json({ message: "All fields are required", success: false });
         }
@@ -19,6 +20,22 @@ export const register = async (req, res) => {
         if (user || checkStudent) {
             return res.status(400).json({ message: "Email already exist, try different email", success: false });
         }
+
+        const recentOtp = await OTP.findOne({ email })
+        .sort({ createdAt: -1 })
+        .limit(1);
+        if (recentOtp.length === 0) {
+           return res.status(400).json({
+             success: false,
+             message: "OTP Not Found!",
+           });
+         }
+         if (otp !== recentOtp.otp) {
+           return res.status(400).json({
+             success: false,
+             message: "Invalid OTP",
+           });
+         }
         const hashedPassword = await bcrypt.hash(password, 10);
         user = await Expert.create({
             name,

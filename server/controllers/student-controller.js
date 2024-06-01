@@ -2,25 +2,42 @@ import { Student } from "../models/student-model.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { Expert } from "../models/expert-model.js";
+import OTP from "../models/otp-model.js";
 
 export const register = async (req, res) => {
    
-   try {
+   // try {
       let user,checkExpert;
 
-      const { name, email, phoneNo, password, confirmPassword } = req.body;
+      const { name, email, phoneNo, password, confirmPassword,otp} = req.body;
 
-      if (!name || !email || !password || !phoneNo || !confirmPassword) {
+      if (!name || !email || !password || !phoneNo || !confirmPassword ) {
          return res.status(400).json({ message: "All fields are required", success: false });
       }
-      if (password !== confirmPassword) {
-         return res.status(400).json({ message: "Password do not match", success: false });
-      }
+      // if (password !== confirmPassword) {
+      //    return res.status(400).json({ message: "Password do not match", success: false });
+      // }
       user = await Student.findOne({ email });
       checkExpert=await Expert.findOne({email});
       if (user || checkExpert) {
          return res.status(400).json({ message: "Email already exist, try different email", success: false });
       }
+      const recentOtp = await OTP.findOne({ email })
+      .sort({ createdAt: -1 })
+      .limit(1);
+      if (!recentOtp) {
+         return res.status(400).json({
+           success: false,
+           message: "OTP Not Found!",
+         });
+       }
+       if (otp !== recentOtp.otp) {
+         return res.status(400).json({
+           success: false,
+           message: "Invalid OTP",
+         });
+       }
+
       const hashedPassword = await bcrypt.hash(password, 10);
 
       user = await Student.create({
@@ -37,10 +54,10 @@ export const register = async (req, res) => {
          message: "Account created successfully.",
          success: true
       })
-   }
-   catch (err) {
-      return res.status(500).json({ message: "internal server error", err, success: false })
-   }
+   // }
+   // catch (err) {
+   //    return res.status(500).json({ message: "internal server error", err, success: false })
+   // }
 }
 
 export const login = async (req, res) => {
