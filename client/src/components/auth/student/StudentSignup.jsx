@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../api/studentapi";
+import axios from "axios";
 
 const StudentSignup = () => {
   const navigate = useNavigate();
@@ -23,7 +23,12 @@ const StudentSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await register(inputs);
+      if(inputs.password!==inputs.confirmPassword)
+        {
+           alert('confirm password do not match.')
+           return;
+        }
+      const response = await axios.post('http://localhost:5000/api/v1/otp/sendotp',{email:inputs.email})
       alert(response.data.message);
       setInputs({
         name: '',
@@ -32,7 +37,7 @@ const StudentSignup = () => {
         password: '',
         confirmPassword: '',
       });
-      navigate("/studentlogin");
+      navigate("/otpverifystudent",{ state: { userData: inputs } });
     } catch (error) {
       alert(error.response.data.message);
     }

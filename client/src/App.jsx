@@ -10,8 +10,9 @@ import StudentLogin from './components/auth/student/StudentLogin'
 import StudentSignup from './components/auth/student/StudentSignup'
 import StudentHome from './components/home/StudentHome'
 import ExpertHome from './components/home/ExpertHome'
-import Landing from './components/auth/landing/Landing'
-
+import Landing from './components/auth/Landing'
+import OtpVerifyStudent from './components/auth/student/OtpVerify-student'
+import OtpVerifyExpert from './components/auth/expert/OtpVerify-expert'
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
           <Route path='/expertsignup' element={<ExpertSignup/>}/>
           <Route path='/expertlogin' element={<ExpertLogin/>}/>
           <Route path='/expertforget' element={<ExpertForget/>} />
+          <Route path='/otpverifystudent' element={<OtpVerifyStudent/>}/>
+          <Route path='/otpverifyexpert' element={<OtpVerifyExpert/>}/>
        </Routes>
     </BrowserRouter>
   )

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../../api/expertapi";
+import axios from "axios";
 
 const ExpertSignup = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const ExpertSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await register(inputs);
+      const response = await axios.post('http://localhost:5000/api/v1/otp/sendotp',{email:inputs.email})
       alert(response.data.message);
       setInputs({
         name: '',
@@ -38,7 +38,7 @@ const ExpertSignup = () => {
         password: '',
         confirmPassword: '',
       });
-      navigate("/expertlogin");
+      navigate("/otpverifyexpert",{ state: { userData: inputs } });
     } catch (error) {
       alert(error.response.data.message);
     }
