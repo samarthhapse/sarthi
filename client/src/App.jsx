@@ -2,19 +2,15 @@
 import './App.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Landing } from './components/landing/Landing'
-import { StudentHome } from './components/home/StudentHome';
-import { StudentSignup } from './components/student/StudentSignup';
-import { StudentLogin } from './components/student/StudentLogin';
-import { StudentForget } from './components/student/StudentForget';
-import { ExpertHome } from './components/home/ExpertHome';
-import { ExpertSignup } from './components/expert/ExpertSignup';
-import { ExpertLogin } from './components/expert/ExpertLogin';
-import { ExpertForget } from './components/expert/ExpertForget';
-
-
-
-
+import ExpertForget from './components/auth/expert/ExpertForget'
+import ExpertLogin from './components/auth/expert/ExpertLogin'
+import ExpertSignup from './components/auth/expert/ExpertSignup'
+import StudentForget from './components/auth/student/StudentForget'
+import StudentLogin from './components/auth/student/StudentLogin'
+import StudentSignup from './components/auth/student/StudentSignup'
+import StudentHome from './components/home/StudentHome'
+import ExpertHome from './components/home/ExpertHome'
+import Landing from './components/auth/landing/Landing'
 
 
 function App() {

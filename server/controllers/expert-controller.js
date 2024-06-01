@@ -5,10 +5,10 @@ import { Student } from "../models/student-model.js";
 
 export const register = async (req, res) => {
     
-    try {
+     try {
         let user,checkStudent;
-        const { name, email, phoneNo, expertise, field, college, jobTitle, password, confirmPassword } = req.body;
-        if (!name || !email || !password || !confirmPassword || !phoneNo || !expertise || !field || !college || !jobTitle) {
+        const { name, email, phoneNo, expertise, field, jobTitle, password, confirmPassword } = req.body;
+        if (!name || !password || !confirmPassword || !phoneNo || !expertise || !field || !jobTitle) {
             return res.status(400).json({ message: "All fields are required", success: false });
         }
         if (password !== confirmPassword) {
@@ -27,7 +27,6 @@ export const register = async (req, res) => {
             password: hashedPassword,
             expertise,
             field,
-            college,
             jobTitle
         })
         if (!user) {
@@ -84,7 +83,14 @@ export const login = async (req, res) => {
 export const changePassword = async (req, res) => {
 
     try {
-        const { email, current_password, new_password } = req.body;
+        const { email, current_password, new_password,confirm_new_password } = req.body;
+        if(new_password !== confirm_new_password)
+            {
+                return res.status(400).json({
+                    message: "Confirm password do not match.",
+                    success: false
+                })
+            }
         const user = await Expert.findOne({ email })
         if (!user) {
             return res.status(400).json({ message: "No user found!", success: false });
