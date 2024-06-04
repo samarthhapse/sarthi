@@ -8,11 +8,34 @@ import Stack2 from '../../assets/Stack2.jpeg'
 import Stack3 from '../../assets/Stack3.jpeg' 
 
 
-
 export default function HomePage() {
+  var x=0;
+  function handleToggle(){
+    x=1-x;
+    var d=document.body;
+    var but=document.querySelector('.toggle');
+    if(x==1)
+      {
+        d.style.backgroundColor="#0D203D";
+        d.style.color="white";
+        but.innerHTML="Light";
+        but.style.backgroundColor="#fff";
+        but.style.color="#0D203D";  
+      }
+    else{
+        d.style.backgroundColor="#fff";
+        d.style.color="#0D203D";
+        but.innerHTML="Dark";
+        but.style.backgroundColor="#0D203D";
+        but.style.color="#fff";
+    }
+  }
   return (
     <>
       <section>
+        <div className="flex justify-end">
+            <div><button className="toggle bg-[#0D203D] text-[#fff] p-2 rounded-md w-20" onClick={handleToggle}>Dark</button></div>
+        </div>
         <div className="mx-auto max-w-screen-xl min-w-screen-sm px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 overflow-x-hidden">
             <motion.div 
@@ -48,6 +71,7 @@ export default function HomePage() {
                 today and discover the joy of fitness!
               </p>
             </motion.div>
+           
           </div>
         </div>
       </section>
