@@ -16,11 +16,9 @@ function Preloader() {
     <div>
             {
                 loading ?
-                <div className="bg-[ #213547]">
-                    
-                    <Lottie animationData={pre}/>
-                </div>
-                
+                <div className="bg-[#213547] flex justify-center relative top-[3.5rem]">
+                  <div><Lottie animationData={pre}/> </div> 
+                </div> 
                  :
                 //Rest Code
                     <App/>
