@@ -1,7 +1,6 @@
-
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 const StudentSignup = () => {
@@ -23,12 +22,11 @@ const StudentSignup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if(inputs.password!==inputs.confirmPassword)
-        {
-           alert('confirm password do not match.')
-           return;
-        }
-      const response = await axios.post('http://localhost:5000/api/v1/otp/sendotp',{email:inputs.email})
+      if(inputs.password !== inputs.confirmPassword) {
+        alert('Confirm password does not match.');
+        return;
+      }
+      const response = await axios.post('http://localhost:5000/api/v1/otp/sendotp', { email: inputs.email });
       alert(response.data.message);
       setInputs({
         name: '',
@@ -37,25 +35,41 @@ const StudentSignup = () => {
         password: '',
         confirmPassword: '',
       });
-      navigate("/otpverifystudent",{ state: { userData: inputs } });
+      navigate("/otpverifystudent", { state: { userData: inputs } });
     } catch (error) {
       alert(error.response.data.message);
     }
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center ">
-      <div className="w-[900px] flex rounded-lg shadow-lg overflow-hidden">
+    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center">
+      <motion.div 
+        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="flex-1 flex flex-col items-center justify-center bg-teal-500 p-3">
           <h1 className="text-white text-2xl font-[serif]">Already a registered student?</h1>
           <Link to='/studentlogin'>
-            <button type="button" className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100">
+            <motion.button 
+              type="button" 
+              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
               Sign in
-            </button>
+            </motion.button>
           </Link>
         </div>
         <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-10">
-          <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+          <motion.form 
+            onSubmit={handleSubmit} 
+            className="flex flex-col items-center w-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
             <h1 className="text-4xl font-[serif] mb-5">Create Your Account</h1>
             <input
               type="text"
@@ -102,17 +116,19 @@ const StudentSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <button type="submit" className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600">
+            <motion.button 
+              type="submit" 
+              className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Sign up
-            </button>
-          </form>
+            </motion.button>
+          </motion.form>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 export default StudentSignup;
-
-
-
