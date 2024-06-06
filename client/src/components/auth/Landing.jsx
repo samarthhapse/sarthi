@@ -6,7 +6,7 @@ import backgroundImage from '../../assets/main.jpg';
 const Landing = () => {
     const navigate = useNavigate();
     return( 
-        <div className="w-screen min-h-screen bg-cover bg-center flex items-center justify-center p-0" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="w-full min-h-screen bg-cover bg-center flex items-center justify-center p-0" style={{ backgroundImage: `url(${backgroundImage})` }}>
             
             <div className="bg-gray-900 bg-opacity-50 p-8 rounded-lg">
                 <div className="text-center mb-8">
