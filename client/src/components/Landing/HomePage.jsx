@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <>
       <section>
-      <div className="flex justify-end">
+      <div className="flex justify-end m-4 p-4">
             <div><button className="toggle bg-[#0D203D] text-[#fff] p-2 rounded-md w-20" onClick={handleToggle}>Dark</button></div>
         </div>
         <div className="mx-auto max-w-screen-xl min-w-screen-sm px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
