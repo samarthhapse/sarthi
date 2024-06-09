@@ -46,27 +46,15 @@ const ExpertSignup = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center">
+    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
       <motion.div 
         className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="flex-1 flex flex-col items-center justify-center bg-teal-500 p-3">
-          <h1 className="text-white text-2xl font-[serif]">Already a registered expert?</h1>
-          <Link to='/expertlogin'>
-            <motion.button 
-              type="button" 
-              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              Sign in
-            </motion.button>
-          </Link>
-        </div>
-        <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-10">
+       
+        <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col items-center w-full"
@@ -190,6 +178,19 @@ const ExpertSignup = () => {
               Sign up
             </motion.button>
           </motion.form>
+        </div>
+        <div className="flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+          <h1 className="text-white text-2xl font-[serif]">Already a registered expert?</h1>
+          <Link to='/expertlogin'>
+            <motion.button 
+              type="button" 
+              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              Sign in
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
     </div>
