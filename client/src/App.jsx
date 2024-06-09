@@ -19,7 +19,6 @@ import { ThemeContext } from './components/context/theme';
 import Error from './components/Basic/PageNotFound';
 
 
-
 function App() {
   // const { theme } = useContext(ThemeContext);
   return (
