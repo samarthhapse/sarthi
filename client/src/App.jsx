@@ -16,7 +16,8 @@ import HomePage from './components/Landing/HomePage'
 import OtpVerifyStudent from './components/auth/student/OtpVerify-student'
 import OtpVerifyExpert from './components/auth/expert/OtpVerify-expert'
 import { ThemeContext } from './components/context/theme';
-import PageNotFound from './components/Basic/PageNotFound';
+import Error from './components/Basic/PageNotFound';
+
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       {/* <Navbar /> */}
        <Routes>
           <Route path='/' element={<HomePage />}/>
+          <Route path='/*' element={<Error/>}/>
           <Route path='/Landing' element={<Landing />}/>
           <Route path='/studenthome' element={<StudentHome /> } />
           <Route path='/experthome' element={<ExpertHome/>}/>
@@ -37,7 +39,6 @@ function App() {
           <Route path='/expertforget' element={<ExpertForget/>} />
           <Route path='/otpverifystudent' element={<OtpVerifyStudent/>}/>
           <Route path='/otpverifyexpert' element={<OtpVerifyExpert/>}/>
-          <Route path='/*' element={<PageNotFound />} />
        </Routes>
     </BrowserRouter>
   )
