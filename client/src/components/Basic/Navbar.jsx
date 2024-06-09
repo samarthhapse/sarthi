@@ -9,7 +9,7 @@ const Navbar = () => {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
   return (
-    <div className="w-full h-10 flex pt-8 m-0 text-xl">
+    <div className="w-full h-16 flex  m-0 text-xl">
       <div className="flex justify-center items-center ml-4 mr-[100px]">
         <div className="w-9 h-9 mx-3">
           <img src={pic} className="w-full h-full" alt="Logo" />
@@ -112,7 +112,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex justify-center items-center ml-9">
-        <Link to="/studentsignup">
+        <Link to="/Landing">
           <button className="hover:text-gray-700 transition duration-300">
             Login
           </button>
