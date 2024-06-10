@@ -1,89 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion"; 
-import meet from '../../assets/Front1.png' 
+import Box from "../Basic/Box";
+import Marquee from "../Basic/Marquee";
+import Results from "../Basic/Results";
+import Overview from "../Basic/Overview";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Banner from "../Basic/Banner";
+import Form from "../Basic/Form";
+import Faq from "../Basic/Faq";
+import Footer from "../Basic/Footer";
 import Main from '../../assets/Main.png' 
-import Stack1 from '../../assets/Stack.jpeg' 
-import Stack2 from '../../assets/Stack2.jpeg' 
-import Stack3 from '../../assets/Stack3.jpeg' 
-
-
-
-export default function HomePage() {
-  var x=0;
-  function handleToggle(){
-    x=1-x;
-    var d=document.body;
-    var but=document.querySelector('.toggle');
-    
-    if(x==1)
-      {
-        d.style.backgroundColor="#0D203D";
-        d.style.color="white";
-        but.innerHTML="Light";
-        but.style.backgroundColor="#fff";
-        but.style.color="#0D203D";  
-      }
-    else{
-        d.style.backgroundColor="#fff";
-        d.style.color="#0D203D";
-        but.innerHTML="Dark";
-        but.style.backgroundColor="#0D203D";
-        but.style.color="#fff";
-    }
-  }
-
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+const HomePage = () => {
   return (
-    <>
-      <section>
-      <div className="flex justify-end m-4 p-4">
-            <div><button className="toggle bg-[#0D203D] text-[#fff] p-2 rounded-md w-20" onClick={handleToggle}>Dark</button></div>
-        </div>
-        <div className="mx-auto max-w-screen-xl min-w-screen-sm px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 overflow-x-hidden">
-            <motion.div 
-              initial={{ opacity: 0, x: 200 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 2}}
-            className="relative h-64 overflow-hidden rounded-lg sm:h-80 lg:order-last lg:h-full">
-              <img
-                alt="Online Meeting Of Seniors and Juniors"
-                src= {meet}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
-            </motion.div>
-
-            <motion.div
-            initial={{ opacity: 0, x: -200 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 2 }}
-            className="lg:py-24">
-              <h2 className="text-6xl font-bold sm:text-6xl text-center">
-                <div className="mb-8 font-serif">Sarthi - Your Bridge to Expert </div>
-                <span className="bg-indigo-500 text-white p-auto">Insights + Guidance</span>
-              </h2>
-            
-              <p className="mt-8 text-center">
-              Sarthi is an innovative online platform designed to bridge the gap between junior novices and seasoned experts across various industries. Whether you're a student looking for guidance, a budding professional seeking career advice, or an individual encountering technical hurdles, Sarthi is here to connect you with experienced mentors from around the globe.
-              </p>
-              <p className="mt-4 text-center sm:text-lg">
-                <a href="/Landing" className="">
-                  Join us
-                </a>
-                today and discover the joy of fitness!
-              </p>
-            </motion.div>
+    <div>
+      <div className="flex justify-between items-center bg-[#fff6f0] min-h-screen w-[100vw]">
+        <div className="text-left max-w-3xl flex flex-col justify-center mr-11 p-8 ml-3 mt-6">
+          <h2 className="uppercase text-sm font-semibold text-gray-700 mb-2">
+            10x Webinar Value & Repurpose Content with AI
+          </h2>
+          <h1 className="text-5xl font-bold text-gray-900 mb-6 w-[700px]">
+            Webinar software for the modern marketer
+          </h1>
+          <p className="text-lg text-gray-700 mb-8">
+            Seamlessly Design, Host, and Repurpose Company Town
+          </p>
+          <div className="flex space-x-4">
+            <button className="bg-blue-600 text-white px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 transition duration-300">
+              Try it yourself
+            </button>
+            <button className="bg-white text-gray-800 border border-gray-300 px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 hover:text-white transition duration-300">
+              Book a demo
+            </button>
           </div>
         </div>
-      </section>
+        <div className="relative mt-16 h-full max-w-4xl ml-11 flex justify-end">
+          <div className="relative p-6 w-[320px] h-[390px] bg-black rounded-lg shadow-lg  rounded-1-custom">
+            <div className="absolute bottom-0  top-0 right-0 mr-3 w-[580px] h-[395px] bg-black rounded-l-custom"></div>
+            <div className="relative z-10 p-5 mt-5 back rounded-lg shadow-lg mr-2">
+              <div className="bg-white p-2 rounded-lg shadow-lg">
+                <img
+                  src="https://as1.ftcdn.net/v2/jpg/05/55/13/42/1000_F_555134240_TwHE9DMBbjxw4sr7Ud3Tt9FPmQMJ8DjQ.jpg"
+                  alt="Maria Leon"
+                  style={{height:"200px"}}
+                  className="w-72 h-68 rounded-lg object-cover"
+                />
+                <p className="mt-2 text-center text-gray-700">Maria Leon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section>
         <div className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <motion.div 
-            initial={{ opacity: 0, y: 200 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2 }}
+            
             className="bg-blue-600 p-8 md:p-12 lg:px-16 lg:py-24 rounded-2xl">
 
               <div className="mx-auto max-w-xl">
@@ -111,7 +83,7 @@ export default function HomePage() {
                 </div>
               </div>
             </motion.div>
-
+      
             <div className="">
               <img
                 alt="Gym room"
@@ -124,57 +96,17 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <section>
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
-          <header className="text-center">
-            <h2 className="text-xl font-bold  sm:text-4xl text-indigo-500">
-              Your Pathway to Expert Assistance
-            </h2>
-
-            <p className="max-w-md mx-auto mt-4 sm:text-lg">
-              Our state-of-the-art facility and expert trainers are here to help
-              you achieve your goals, whether you're just starting out
-              or are a seasoned pro.
-            </p>
-          </header>
-
-          <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
-            <li>
-              <div className="relative block group">
-                <img
-                  src={Stack3}
-                  alt="exercise"
-                  loading="lazy"
-                  className="object-cover h-full w-full transition duration-500 aspect-square group-hover:opacity-90"
-                />
-              </div>
-            </li>
-
-            <li>
-              <div className="relative block group">
-                <img
-                  src={Stack1}
-                  alt="exercise"
-                  loading="lazy"
-                  className="object-cover h-full w-full transition duration-500 aspect-square group-hover:opacity-90"
-                />
-              </div>
-            </li>
-
-            <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-              <div className="relative block group">
-                <img
-                  src={Stack2}
-                  alt="exercise"
-                  loading="lazy"
-                  className="object-cover h-full w-full transition duration-500 aspect-square group-hover:opacity-90"
-                />
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </>
+        
+      <Marquee />
+      <Box />
+      <Results/>
+      <Overview/>
+      <Banner/>
+      <Form/>
+      <Faq/>
+      <Footer/>
+    </div>
   );
-}
+};
+
+export default HomePage;
