@@ -26,12 +26,11 @@ const HomePage = () => {
             Seamlessly Design, Host, and Repurpose Company Town
           </p>
           <div className="flex space-x-4">
+          <Link to="/Landing">
             <button className="bg-blue-600 text-white px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 transition duration-300">
               Try it yourself
             </button>
-            <button className="bg-white text-gray-800 border border-gray-300 px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 hover:text-white transition duration-300">
-              Book a demo
-            </button>
+            </Link>
           </div>
         </div>
         <div className="relative mt-16 h-full max-w-4xl ml-11 flex justify-end">

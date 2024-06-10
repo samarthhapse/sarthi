@@ -16,7 +16,7 @@
   padding: 0;
 }
 body {
-  background-color:#fff6f0;
+  background-color:#100701;
  overflow-x: hidden;
 }
 .drop {
@@ -80,7 +80,7 @@ body {
 
 .marquee__content > * {
   flex: 0 0 auto;
-  color: white;
+  color: rgb(3, 20, 47);
   background: transparent;
   margin: 2px;
   padding: 1rem 2rem;
