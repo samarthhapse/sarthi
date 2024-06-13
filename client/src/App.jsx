@@ -3,6 +3,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./components/context/theme";
 import ExpertForget from "./components/auth/expert/ExpertForget";
 // import Navbar from './components/Basic/Navbar'
 import ExpertLogin from "./components/auth/expert/ExpertLogin";
@@ -22,6 +23,7 @@ import Navbar from "./components/Basic/Navbar";
 function App() {
   // const { theme } = useContext(ThemeContext);
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <Navbar />
       <Routes >
@@ -41,6 +43,7 @@ function App() {
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
