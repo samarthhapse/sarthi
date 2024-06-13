@@ -15,7 +15,7 @@ app.use(cors())
 
 app.use('/api/v1/student/',studentRoute)
 app.use('/api/v1/expert/',expertRoute)
-app.use('/api/v1/otp',otpRoute)
+app.use('/api/v1/otp/',otpRoute)
 app.listen(PORT, () => {
     connectDB()
         .then(() => {
