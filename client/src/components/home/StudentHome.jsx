@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ExpertiseCard from "./studentHome/ExpertiseCard";
-import axios from "axios";
 import ExpertCard from "./studentHome/ExpertCard";
+import { getAllExperts } from "../api/expertapi";
 
 const StudentHome = () => {
   const [selectedExpertise, setSelectedExpertise] = useState(null);
@@ -18,7 +18,7 @@ const StudentHome = () => {
       return;
     }
 
-    const response = await axios.get("http://localhost:5000/api/v1/expert/");
+    const response = await getAllExperts()
     const { data } = response;
     const experts = data.user.filter((expert) => expert.expertise === value);
     console.log(experts);

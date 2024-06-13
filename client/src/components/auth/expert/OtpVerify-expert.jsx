@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { register } from "../../api/expertapi";
+import { expertRegister } from "../../api/expertapi";
 import { useDispatch } from 'react-redux';
 import { setAuthToken } from "../../../redux/studentSlice";
 
@@ -41,7 +41,7 @@ const OtpVerify = () => {
       return;
     }
     try {
-      const response = await register({ ...userData, otp: otp.join('') });
+      const response = await expertRegister({ ...userData, otp: otp.join('') });
       console.log(response)
       alert(response.data.message);
       dispatch(setAuthToken(response.data.token));

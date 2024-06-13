@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../api/expertapi";
+import { expertLogin } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
@@ -22,7 +22,7 @@ const ExpertLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(inputs);
+      const response = await expertLogin(inputs);
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
