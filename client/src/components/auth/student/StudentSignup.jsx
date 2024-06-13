@@ -42,16 +42,16 @@ const StudentSignup = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center bg-custom-gradient text-white">
+    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
       <motion.div
-        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
+        className="w-full md:w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         
-        <div className="flex-[1.5] flex flex-col  bg-card-custom-gradient p-10 ">
-        <div className="flex justify-start items-start pb-6 text-2xl font-bold"><h1 className=" text-green-400">Sarthi</h1></div>
+        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
+        <div className="flex justify-start items-start pb-2 md:pb-6 text-xl md:text-2xl font-bold"><h1 className=" text-green-400 md:text-2xl">Sarthi</h1></div>
           <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col items-center w-full"
@@ -68,8 +68,8 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.name}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-5 mt-8 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="email"
               placeholder="Email"
@@ -77,8 +77,8 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.email}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-5 mt-8 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="text"
               placeholder="Phone number"
@@ -86,8 +86,8 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.phoneNo}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-5 mt-8 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="password"
               placeholder="Password"
@@ -95,8 +95,8 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.password}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-5 mt-8 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="password"
               placeholder="Confirm password"
@@ -104,8 +104,8 @@ const StudentSignup = () => {
               onChange={handleChange}
               value={inputs.confirmPassword}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-5 mt-8 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <motion.button
               type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
@@ -116,7 +116,7 @@ const StudentSignup = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3">
+        <div className="md:w-[50%] flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
           <img src={image1}alt="Hello" height={300} width={300}/>
           <h1 className="text-white text-2xl font-[serif]">
             Already a registered student?

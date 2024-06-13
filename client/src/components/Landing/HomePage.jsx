@@ -13,13 +13,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 const HomePage = () => {
   return (
-    <div>
-      <div className="flex justify-between items-center bg-[#fff6f0] min-h-screen w-[100vw]">
-        <div className="text-left max-w-3xl flex flex-col justify-center mr-11 p-8 ml-3 mt-6">
-          <h2 className="uppercase text-sm font-semibold text-gray-700 mb-2">
+    <div className="max-w-full overflow-x-hidden">
+      <div className="  flex flex-col justify-between items-center bg-[#fff6f0] min-h-screen max-w-100vw md:w-full sm:flex-row ">
+  <div className=" text-left max-w-3xl flex flex-col justify-center p-8 mt-6 sm:mr-11 sm:ml-3">
+    <h2 className="uppercase text-sm font-semibold text-gray-700 mb-2">
             10x Webinar Value & Repurpose Content with AI
           </h2>
-          <h1 className="text-5xl font-bold text-gray-900 mb-6 w-[700px]">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6 sm:w-96">
             Webinar software for the modern marketer
           </h1>
           <p className="text-lg text-gray-700 mb-8">
@@ -27,22 +27,22 @@ const HomePage = () => {
           </p>
           <div className="flex space-x-4">
           <Link to="/Landing">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 transition duration-300">
+            <button className="bg-blue-600  flex  text-white px-6 py-3 rounded-3xl shadow-lg hover:bg-blue-700 transition duration-300">
               Try it yourself
             </button>
             </Link>
           </div>
         </div>
-        <div className="relative mt-16 h-full max-w-4xl ml-11 flex justify-end">
-          <div className="relative p-6 w-[320px] h-[390px] bg-black rounded-lg shadow-lg  rounded-1-custom">
-            <div className="absolute bottom-0  top-0 right-0 mr-3 w-[580px] h-[395px] bg-black rounded-l-custom"></div>
-            <div className="relative z-10 p-5 mt-5 back rounded-lg shadow-lg mr-2">
-              <div className="bg-white p-2 rounded-lg shadow-lg">
+        <div className="relative mt-16 h-full max-w-4xl ml-3 sm:ml-11 flex justify-end">
+    <div className="relative p-6 w-full sm:w-[300px] h-[390px] bg-black rounded-lg shadow-lg  rounded-1-custom  ml-[-70px]">
+      <div className="absolute bottom-0  top-0 right-0 mr-3 w-[540px] h-[395px] bg-black rounded-l-custom "></div>
+      <div className="relative z-10 p-5 mt-5 back rounded-lg shadow-lg mr-2">
+        <div className="bg-white p-2 rounded-lg shadow-lg">
                 <img
                   src="https://as1.ftcdn.net/v2/jpg/05/55/13/42/1000_F_555134240_TwHE9DMBbjxw4sr7Ud3Tt9FPmQMJ8DjQ.jpg"
                   alt="Maria Leon"
                   style={{height:"200px"}}
-                  className="w-72 h-68 rounded-lg object-cover"
+                  className="w-full h-68 rounded-lg object-cover"
                 />
                 <p className="mt-2 text-center text-gray-700">Maria Leon</p>
               </div>
@@ -51,8 +51,8 @@ const HomePage = () => {
         </div>
       </div>
       <section>
-        <div className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mx-auto max-w-screen-2xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <motion.div 
             
             className="bg-blue-600 p-8 md:p-12 lg:px-16 lg:py-24 rounded-2xl">
@@ -62,7 +62,7 @@ const HomePage = () => {
                   Your One-Stop Destination for {" "}
                 </h2>
 
-                <p className="hidden text-white/100 sm:mt-4 sm:block">
+                <p className="hidden text-white md:block mt-4">
                   <ul className="text-lg">
                     <li>Bug Solving</li>
                     <li>Tech Career Assistance</li>

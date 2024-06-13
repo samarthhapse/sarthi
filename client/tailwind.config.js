@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      maxWidth: {
+        '100vw': '100vw',
+      },
       colors: {
         primary: {
           50: "#eff6ff",

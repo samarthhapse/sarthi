@@ -5,7 +5,7 @@ const Box = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleScroll = () => {
-    const position = window.pageYOffset;
+    const position = window.pageOffset;
     setScrollPosition(position);
   };
 
@@ -21,7 +21,7 @@ const Box = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="flex flex-col items-center justify-center min-h-screen px-4 text-center backbox w-full">
-        <div className=" w-[1200px] p-8 bg-black text-white rounded-lg">
+        <div className=" max-w-[1200px] w-full p-8 bg-black text-white rounded-lg">
           <h1 className="text-5xl font-bold">Have your cake, and eat it too</h1>
           <p className="mt-4 text-2xl">
             Host beautiful webinars and scale your content all at once.

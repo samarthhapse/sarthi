@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 
 * {
@@ -12,6 +10,7 @@
   padding: 0;
 }
 #root {
+  
   margin: 0;
   padding: 0;
 }
