@@ -44,6 +44,14 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center justify-center ml-[100px] w-[800px] mr-[50px]">
+      <Link
+          key="home"
+          to="/"
+          className="mx-10 hover:text-gray-700 transition duration-300"
+      >
+          Home
+      </Link>
+      
         <div className="relative">
           <button
             onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
