@@ -147,7 +147,7 @@ export const expertDetails=async(req,res)=>{
 
  export const getAllExperts=async(req,res)=>{
     try{
-      const user=await Expert.find()
+      const user=await Expert.find().select("-password")
       if(!user)
        {
           return res.status(500).json({ message: "internal server error", err, success: false })
