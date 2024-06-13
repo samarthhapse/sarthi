@@ -1,0 +1,35 @@
+name: Auto Comment on Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add Comment to Issue
+        run: |
+          COMMENT=$(cat <<EOF
+          {
+            "body": "Hello {{ contributor_name }},\n\nThank you for submitting your issue. In order to ensure clarity and efficiency in our communication and workflow, we kindly request that you provide the following essential details:\n\n1. **Title**: Please provide a clear and descriptive title summarizing the issue.\n2. **Description**: Include a detailed description of the problem or suggestion.\n\nEnsuring that these details are included will help us better understand and address the issue promptly. Your cooperation is greatly appreciated.\n\nThank you,\n{{ SARTHI }}"
+          }
+          EOF
+          )
+          RESPONSE=$(curl -s -o response.json -w "%{http_code}" \
+            -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
+            -d "$COMMENT")
+          cat response.json
+          if [ "$RESPONSE" -ne 201 ]; then
+            echo "Failed to add comment"
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
