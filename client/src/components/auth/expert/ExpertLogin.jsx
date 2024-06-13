@@ -40,27 +40,16 @@ const ExpertLogin = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center">
-      <motion.div
-        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
+    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
+  <motion.div
+        className="w-full md:w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="flex-1 flex flex-col items-center justify-center bg-teal-500 p-3">
-          <h1 className="text-white text-2xl font-[serif]">Do not have an account?</h1>
-          <Link to='/expertsignup'>
-            <motion.button
-              type="button"
-              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              Sign up
-            </motion.button>
-          </Link>
-        </div>
-        <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-10">
+        
+        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
+      
           <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col items-center w-full"
@@ -76,8 +65,8 @@ const ExpertLogin = () => {
               onChange={handleChange}
               value={inputs.email}
               required
-              className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <input
               type="password"
               placeholder="Password"
@@ -85,8 +74,8 @@ const ExpertLogin = () => {
               onChange={handleChange}
               value={inputs.password}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <a href="/expertforget" className="text-md font-medium text-gray-950 hover:text-gray-700">Forget password?</a>
             <motion.button
               type="submit"
@@ -97,6 +86,19 @@ const ExpertLogin = () => {
               Sign in
             </motion.button>
           </motion.form>
+        </div>
+        <div className="md:flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+      <h1 className="text-white text-2xl font-serif">Do not have an account?</h1>
+          <Link to='/expertsignup'>
+            <motion.button
+              type="button"
+              className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              Sign up
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
     </div>
