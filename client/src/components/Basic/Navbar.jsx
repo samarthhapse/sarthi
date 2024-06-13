@@ -37,11 +37,12 @@ const Navbar = () => {
     <div className="max-w-full overflow-x-hidden ">
      <div className="h-16 flex flex-col md:flex-row items-center justify-between mb-10 md:mb-6 lg:mb-4 xl:mb-2 text-xl w-full md:w-full mx-[-2px] ">
   <div className="flex items-center ml-4 md:ml-8">
+      <Link to="/">  
         <div className=" static w-22px h-15 mx-4 ">
           <img src={pic} className="w-[100px] "  alt="Logo" />
         </div>
         <h3 >Welcome</h3>
-       
+      </Link> 
       </div>
 
       <div className="flex flex-wrap items-center justify-center ml-4 md:ml-8 md:w-auto md:mr-4">
@@ -53,7 +54,7 @@ const Navbar = () => {
       >
           Home
       </Link>
-      
+
         <div >
           <button
             onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
