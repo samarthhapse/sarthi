@@ -48,13 +48,13 @@ const ExpertSignup = () => {
   return (
     <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
       <motion.div 
-        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
+         className="w-full md:w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
        
-        <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
+        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col items-center w-full"
@@ -70,8 +70,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.name}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="email"
               placeholder="Email"
@@ -79,8 +79,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.email}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <input
               type="text"
               placeholder="Phone number"
@@ -88,8 +88,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.phoneNo}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <input
               type="text"
               placeholder="Field"
@@ -97,8 +97,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.field}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <input
               type="text"
               placeholder="Job title"
@@ -106,8 +106,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.jobTitle}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <input
               type="password"
               placeholder="Password"
@@ -115,8 +115,8 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.password}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+        />
             <input
               type="password"
               placeholder="Confirm password"
@@ -124,12 +124,13 @@ const ExpertSignup = () => {
               onChange={handleChange}
               value={inputs.confirmPassword}
               required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+              className="w-full md:w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
             <div className="mb-4 mr-32">
               <div className="mr-40">
-                <h3 className="text-md font-md mb-2">Expertise:</h3>
+                <h3 className="text-md text-gray-700 font-md mb-2">Expertise:</h3>
               </div>
+              
               <div className="flex flex-col">
                 <div className="flex">
                   <input
@@ -141,9 +142,9 @@ const ExpertSignup = () => {
                     checked={inputs.expertise === 'Bug solving'}
                     className="mr-2"
                   />
-                  <label htmlFor="bugSolving" className="mr-4">Bug solving</label>
+                  <label htmlFor="bugSolving" className="mr-4 text-gray-700">Bug solving</label>
                 </div>
-                <div className="flex">
+                <div className=" flex">
                   <input
                     type="radio"
                     id="techCareer"
@@ -153,7 +154,7 @@ const ExpertSignup = () => {
                     checked={inputs.expertise === 'Tech career assistance'}
                     className="mr-2"
                   />
-                  <label htmlFor="techCareer" className="mr-4">Tech career assistance</label>
+                  <label htmlFor="techCareer" className="mr-4  text-gray-700 ">Tech career assistance</label>
                 </div>
                 <div className="flex">
                   <input
@@ -165,7 +166,7 @@ const ExpertSignup = () => {
                     checked={inputs.expertise === 'Academic support'}
                     className="mr-2"
                   />
-                  <label htmlFor="academicSupport">Academic support</label>
+                  <label htmlFor="academicSupport" className="mr-4  text-gray-700">Academic support</label>
                 </div>
               </div>
             </div>
@@ -179,7 +180,7 @@ const ExpertSignup = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+        <div className="md:w-[50%] flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
           <h1 className="text-white text-2xl font-[serif]">Already a registered expert?</h1>
           <Link to='/expertlogin'>
             <motion.button 
