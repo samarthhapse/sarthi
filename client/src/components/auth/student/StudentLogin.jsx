@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../api/studentapi";
+import { studentLogin } from "../../api/studentapi";
 import { useDispatch } from 'react-redux';
 import { setAuthToken } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
@@ -23,7 +23,7 @@ const StudentLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(inputs);
+      const response = await studentLogin(inputs);
       if (response.status === 200) {  
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));

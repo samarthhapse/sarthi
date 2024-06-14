@@ -1,49 +1,83 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
+
 const ExpertSignup = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const avatarInputRef = useRef(null);
+  const [error, setError] = useState(null);
+
   const [inputs, setInputs] = useState({
-    name: '',
-    email: '',
-    phoneNo: '',
-    expertise: '',
-    field: '',
-    jobTitle: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    phoneNo: "",
+    expertise: "",
+    field: "",
+    jobTitle: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
+    setError(null);
     const { name, value } = e.target;
     setInputs({
       ...inputs,
-      [name]: value
+      [name]: value,
     });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    if (
+      [...Object.values(inputs), image].some((input) => !input || input === "")
+    ) {
+      setError("All fields are required");
+      return;
+    }
+    inputs.avatar = image;
     try {
-      const response = await axios.post('http://localhost:5000/api/v1/otp/sendotp',{email:inputs.email})
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/otp/sendotp",
+        { email: inputs.email }
+      );
       alert(response.data.message);
       setInputs({
-        name: '',
-        email: '',
-        phoneNo: '',
-        expertise: '',
-        field: '',
-        jobTitle: '',
-        password: '',
-        confirmPassword: '',
+        name: "",
+        email: "",
+        phoneNo: "",
+        expertise: "",
+        field: "",
+        jobTitle: "",
+        password: "",
+        confirmPassword: "",
       });
-      navigate("/otpverifyexpert",{ state: { userData: inputs } });
+      navigate("/otpverifyexpert", { state: { userData: inputs } });
     } catch (error) {
       alert(error.response.data.message);
     }
+  };
+
+  const addAvatar = () => {
+    avatarInputRef.current.click();
   };
 
   return (
@@ -54,7 +88,6 @@ const ExpertSignup = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-       
        <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-white' }` }>
           <motion.form 
             onSubmit={handleSubmit} 
@@ -64,6 +97,28 @@ const ExpertSignup = () => {
             transition={{ delay: 0.3, duration: 0.8 }}
           >
             <h1 className="text-4xl font-[serif] mb-5">Create Your Account</h1>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              required
+              className=" hidden"
+              ref={avatarInputRef}
+            />
+            {preview && (
+              <img
+                src={preview}
+                alt="Avatar Preview"
+                style={{ width: "120px", height: "120px", borderRadius: "50%" }}
+              />
+            )}
+            <button
+              onClick={addAvatar}
+              type="button"
+              className=" mt-6 bg-green-400 w-32 h-12 rounded-lg text-xl border-none hover:bg-green-500 active:bg-green-600"
+            >
+              Add Avatar
+            </button>
             <input
               type="text"
               placeholder="Name"
@@ -139,7 +194,7 @@ const ExpertSignup = () => {
                     name="expertise"
                     value="Bug solving"
                     onChange={handleChange}
-                    checked={inputs.expertise === 'Bug solving'}
+                    checked={inputs.expertise === "Bug solving"}
                     className="mr-2"
                   />
                   <label htmlFor="bugSolving" className="mr-4">Bug solving</label>
@@ -151,7 +206,7 @@ const ExpertSignup = () => {
                     name="expertise"
                     value="Tech career assistance"
                     onChange={handleChange}
-                    checked={inputs.expertise === 'Tech career assistance'}
+                    checked={inputs.expertise === "Tech career assistance"}
                     className="mr-2"
                   />
                   <label htmlFor="techCareer" className="mr-4">Tech career assistance</label>
@@ -163,15 +218,16 @@ const ExpertSignup = () => {
                     name="expertise"
                     value="Academic support"
                     onChange={handleChange}
-                    checked={inputs.expertise === 'Academic support'}
+                    checked={inputs.expertise === "Academic support"}
                     className="mr-2"
                   />
                   <label htmlFor="academicSupport">Academic support</label>
                 </div>
               </div>
             </div>
-            <motion.button 
-              type="submit" 
+            {error && <p className=" text-red-500 text-sm">{error}</p>}
+            <motion.button
+              type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

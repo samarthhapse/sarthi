@@ -64,7 +64,7 @@ const HomePage = () => {
                   Your One-Stop Destination for {" "}
                 </h2>
 
-                <p className="hidden text-white md:block mt-4">
+                <div className="hidden text-white md:block mt-4">
                   <ul className="text-lg">
                     <li>Bug Solving</li>
                     <li>Tech Career Assistance</li>
@@ -72,7 +72,7 @@ const HomePage = () => {
                     <li>Career Advice</li>
                     <li>Global Connection</li>
                   </ul>
-                </p>
+                </div>
 
                 <div className="mt-4 md:mt-8 text-center">
                   <Link

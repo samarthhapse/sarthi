@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate,useLocation } from "react-router-dom";
-import { register } from "../../api/studentapi";
+import { studentRegister } from "../../api/studentapi";
 import { useDispatch } from 'react-redux';
 import { setAuthToken } from "../../../redux/studentSlice";
 
@@ -42,7 +42,7 @@ const OtpVerify = () => {
       return;
     }
     try {
-      const response = await register({ ...userData, otp: otp.join('') });
+      const response = await studentRegister({ ...userData, otp: otp.join('') });
       console.log(response)
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));

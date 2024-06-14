@@ -1,5 +1,6 @@
-import  { useState } from 'react';
+import  { useContext, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { ThemeContext } from '../context/theme';
 
 
 const faqData = [
@@ -31,6 +32,7 @@ const faqData = [
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const{theme} = useContext(ThemeContext);
 
   const toggleAnswer = (index) => {
     if (activeIndex === index) {
@@ -44,14 +46,14 @@ const Faq = () => {
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 w-[100vw]">
       <div className="max-w-6xl w-full flex flex-col md:flex-row space-y-8 md:space-y-0">
         <div className="md:w-1/3">
-          <h1 className="text-3xl font-bold text-gray-900 mt-[120px] mr-6">Frequently asked questions</h1>
+          <h1 className={`text-3xl font-bold ${theme.color} mt-[120px] mr-6`}>Frequently asked questions</h1>
         </div>
         <div className="md:w-2/3 space-y-4">
           {faqData.map((faq, index) => (
             <div key={index} className="border-b border-gray-200 pb-4">
               <button
                 onClick={() => toggleAnswer(index)}
-                className="w-full text-left flex justify-between items-center text-lg font-medium text-gray-900"
+                className={`w-full text-left flex justify-between items-center text-lg font-medium ${theme.color}`}
               >
                 {faq.question}
                 <span className="ml-4">{activeIndex === index ? '-' : '+'}</span>
@@ -62,7 +64,7 @@ const Faq = () => {
                 classNames="answer"
                 unmountOnExit
               >
-                <div className="mt-2 text-gray-700 text-left">
+                <div className={`mt-2 ${theme.color} text-left`}>
                   {faq.answer}
                 </div>
               </CSSTransition>

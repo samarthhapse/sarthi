@@ -1,10 +1,10 @@
 // src/components/Navbar.js
-import React ,{useState}from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import { FiBox, FiFilm, FiPenTool } from "react-icons/fi"; // Example icons
 import pic from "/src/assets/Saarthi-transformed1.png";
-import { useTheme } from ".././providers/ThemeProvider";
+import { useTheme } from "../providers/ThemeProvider";
 
 const Navbar = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -12,7 +12,7 @@ const Navbar = () => {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const d = document.body;
     if (isDarkMode) {
       d.style.backgroundColor = "#0f2526";
@@ -25,18 +25,27 @@ const Navbar = () => {
 
   return (
     <div className="max-w-full overflow-x-hidden">
-      <div className="h-16 flex flex-col md:flex-row items-center justify-between mb-10 md:mb-6 lg:mb-4 xl:mb-2 text-xl w-full md:w-full mx-[-2px] ">
+      <div className="h-16 flex flex-col md:flex-row items-center justify-between mb-10 md:mb-6 lg:mb-4 xl:mb-2 text-xl w-full md:w-full mx-[-2px]">
         <div className="flex items-center ml-4 md:ml-8">
-          <div className=" static w-22px h-15 mx-4 ">
-            <img src={pic} className="w-[100px]" alt="Logo" />
-          </div>
-          <h3>Welcome</h3>
+          <Link to="/">
+            <div className="static w-22px h-15 mx-4">
+              <img src={pic} className="w-[100px]" alt="Logo" />
+            </div>
+            <h3>Welcome</h3>
+          </Link>
         </div>
         <div className="flex flex-wrap items-center justify-center ml-4 md:ml-8 md:w-auto md:mr-4">
+          <Link
+            key="home"
+            to="/"
+            className="mx-10 hover:text-gray-700 transition duration-300"
+          >
+            Home
+          </Link>
           <div>
             <button
               onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
-              className="mx-4 md:mx-8 flex items-center hover:text-gray-700 transition duration-300 "
+              className="mx-4 md:mx-8 flex items-center hover:text-gray-700 transition duration-300"
             >
               Features <FaChevronDown className="ml-1 mt-[6px]" />
             </button>
@@ -119,7 +128,7 @@ const Navbar = () => {
           <Link
             key="events"
             to="/events"
-            className="mx-2 md:mx-4 hover:text-gray-700 transition duration-300 "
+            className="mx-2 md:mx-4 hover:text-gray-700 transition duration-300"
           >
             Events
           </Link>
