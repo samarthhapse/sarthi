@@ -51,6 +51,7 @@ const ExpertSignup = () => {
       setError("all fields are required");
       return;
     }
+    inputs.avatar = image;
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/otp/sendotp",
