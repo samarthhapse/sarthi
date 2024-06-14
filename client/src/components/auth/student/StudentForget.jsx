@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { changePassword } from "../../api/studentapi";
+import { studentChangePassword } from "../../api/studentapi";
 
 const StudentForget = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const StudentForget = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await changePassword(inputs);
+      const response = await studentChangePassword(inputs);
       alert(response.data.message);
       setInputs({
         email: '',
