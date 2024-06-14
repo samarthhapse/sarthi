@@ -4,6 +4,7 @@ import { Student } from "../models/student-model.js";
 import otpGenerator from "otp-generator";
 import nodemailer from "nodemailer";
 import { otpTemplate } from "../utils/emailTemplates.js";
+import { sendMail } from "../utils/mailer.js";
 const sendOTP = async (req, res) => {
   try {
     const { email } = req.body;
@@ -49,22 +50,7 @@ const sendOTP = async (req, res) => {
 
     // now sending otp using nodeMailer
 
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com",
-      port: 465,
-      auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD,
-      },
-    });
-
-    let info = await transporter.sendMail({
-      from: "Sarthi",
-      to: `${email}`,
-      subject: "Verification email from Sarthi",
-      html: otpTemplate(otp),
-    });
+    const info = await sendMail({receiver:email, otp})
     if (!info) {
       console.log("something went wrong while sending email");
       return res
