@@ -25,6 +25,7 @@ export default {
         "grgreen":"#0f2526",
         "grblack":"#0d1117",
         "grblue":"#0d0e24",
+        'newgreen':'#0f2526'
 
       },
       // backgroundImage: theme => ({
