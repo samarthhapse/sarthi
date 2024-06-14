@@ -4,9 +4,10 @@ import { studentLogin } from "../../api/studentapi";
 import { useDispatch } from 'react-redux';
 import { setAuthToken } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
-
+import { useTheme } from "../../providers/ThemeProvider";
 const StudentLogin = () => {
   const dispatch = useDispatch();
+  const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     email: '',
@@ -40,16 +41,15 @@ const StudentLogin = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
+    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-white' :' bg-white '} `} >
       <motion.div 
-      className="w-full md:w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
+        className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         
-        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
-      
+        <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-white' }` }>
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col items-center w-full"
@@ -65,8 +65,8 @@ const StudentLogin = () => {
               onChange={handleChange}
               value={inputs.email}
               required
-              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-              />
+              className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+            />
             <input
               type="password"
               placeholder="Password"
@@ -74,8 +74,8 @@ const StudentLogin = () => {
               onChange={handleChange}
               value={inputs.password}
               required
-              className="w-full md:w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-              />
+              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+            />
             <a href="/studentforget" className="text-md font-medium text-white hover:text-green-700">Forget password?</a>
             <motion.button 
               type="submit" 
@@ -87,7 +87,7 @@ const StudentLogin = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className="md:flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+        <div className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${isDarkMode ? 'bg-card-custom-gradient' :' bg-teal-500 text-white'}`}>
           <h1 className="text-white text-2xl font-[serif]">Do not have an account?</h1>
           <Link to='/studentsignup'>
             <motion.button 
