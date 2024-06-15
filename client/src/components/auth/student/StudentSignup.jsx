@@ -112,7 +112,7 @@ const StudentSignup = () => {
               type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.95  }}
             >
               Sign up
             </motion.button>

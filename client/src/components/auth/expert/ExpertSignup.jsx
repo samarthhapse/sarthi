@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
-
+import image1  from "../../../assets/img1.png";
 const ExpertSignup = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -115,7 +115,7 @@ const ExpertSignup = () => {
             <button
               onClick={addAvatar}
               type="button"
-              className=" mt-6 bg-green-400 w-32 h-12 rounded-lg text-xl border-none hover:bg-green-500 active:bg-green-600"
+              className=" mt-6 bg-green-400 w-32 h-12  text-xl border-none rounded-3xl mb-6	 hover:bg-green-500 active:bg-green-600"
             >
               Add Avatar
             </button>
@@ -237,6 +237,7 @@ const ExpertSignup = () => {
           </motion.form>
         </div>
         <div className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${isDarkMode ? 'bg-card-custom-gradient' :' bg-teal-500 text-white'}`}>
+        <img src={image1}alt="Hello" height={300} width={300}/>
           <h1 className="text-white text-2xl font-[serif]">Already a registered expert?</h1>
           <Link to='/expertlogin'>
             <motion.button 
