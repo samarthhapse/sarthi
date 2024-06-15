@@ -44,7 +44,7 @@ const StudentSignup = () => {
   };
 
   return (
-    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-white' :' bg-white '} `} >
+    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-black' :' bg-white '} `} >
       <motion.div
         className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
@@ -52,7 +52,7 @@ const StudentSignup = () => {
         transition={{ duration: 0.8 }}
       >
         
-        <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-white' }` }>
+        <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-black' }` }>
         <div className="flex justify-start items-start pb-6 text-2xl font-bold"><h1 className=" text-green-400">Sarthi</h1></div>
           <motion.form
             onSubmit={handleSubmit}
