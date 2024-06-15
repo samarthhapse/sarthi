@@ -40,7 +40,7 @@ const ExpertLogin = () => {
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-white">
+    <div className="w-full min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-custom-gradient text-black">
   <motion.div
         className="w-full md:w-[900px] flex flex-col md:flex-row rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
@@ -48,7 +48,7 @@ const ExpertLogin = () => {
         transition={{ duration: 0.8 }}
       >
         
-        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
+        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-black">
       
           <motion.form
             onSubmit={handleSubmit}
@@ -87,7 +87,7 @@ const ExpertLogin = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className="md:flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+        <div className="md:flex-1 flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-black">
       <h1 className="text-white text-2xl font-serif">Do not have an account?</h1>
           <Link to='/expertsignup'>
             <motion.button

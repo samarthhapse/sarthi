@@ -50,7 +50,7 @@ const StudentSignup = () => {
         transition={{ duration: 0.8 }}
       >
         
-        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-white">
+        <div className="md:flex-[1.5] flex flex-col items-center justify-center bg-white p-10 bg-card-custom-gradient text-black">
         <div className="flex justify-start items-start pb-2 md:pb-6 text-xl md:text-2xl font-bold"><h1 className=" text-green-400 md:text-2xl">Sarthi</h1></div>
           <motion.form
             onSubmit={handleSubmit}
@@ -116,7 +116,7 @@ const StudentSignup = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className="md:w-[50%] flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-white">
+        <div className="md:w-[50%] flex flex-col items-center justify-center bg-teal-500 p-3 bg-card-custom-gradient text-black">
           <img src={image1}alt="Hello" height={300} width={300}/>
           <h1 className="text-white text-2xl font-[serif]">
             Already a registered student?
