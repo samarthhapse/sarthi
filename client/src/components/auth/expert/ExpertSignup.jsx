@@ -81,14 +81,14 @@ const ExpertSignup = () => {
   };
 
   return (
-    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-white' :' bg-white '} `} >
+    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-black' :' bg-white '} `} >
       <motion.div 
         className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-       <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-white' }` }>
+       <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-black' }` }>
           <motion.form 
             onSubmit={handleSubmit} 
             className="flex flex-col items-center w-full"
