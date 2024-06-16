@@ -13,9 +13,7 @@ function Input({ label, value, onChange, readonly = true }) {
         readOnly={readonly}
         value={value}
         onChange={(e) => onChange(e)}
-        className={` w-72 h-12 py-6 px-2 rounded-md ${
-          !readonly && " active:border-none"
-        }`}
+        className={` w-72 h-12 py-6 px-2 rounded-md   }`}
         name={label}
       />
     </div>

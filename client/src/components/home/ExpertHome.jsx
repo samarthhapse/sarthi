@@ -11,10 +11,10 @@ const ExpertHome = () => {
   const data = useSelector((state) => state.expert.expertData) || {};
   const [inputs, setInputs] = useState({
     name: data.name,
-    expertise: data.expertise,
     field: data.field,
     jobTitle: data.jobTitle,
   });
+  const [expertise, setExpertise] = useState(data.expertise || "");
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -32,13 +32,14 @@ const ExpertHome = () => {
   };
   const saveClick = async () => {
     setLoading(true);
+
     if (Object.values(inputs).some((value) => value === "")) {
       setError("all fields are required");
       setLoading(false);
       return;
     }
-
-    const response = await updateExpertDetails(token, inputs).catch((err) => {
+    const userData = {...inputs, expertise} 
+    const response = await updateExpertDetails(token, userData).catch((err) => {
       console.log(err.response);
       setError(err.response.data.message);
       return;
@@ -61,6 +62,25 @@ const ExpertHome = () => {
             readonly={!editMode}
           />
         ))}
+        <div className="flex flex-col ">
+          <label htmlFor="expertise" className="text-xl">
+            expertise
+          </label>
+          <select
+            className=" w-72 h-12 py-6 px-2 rounded-md"
+            id="expertise"
+            value={expertise}
+            onChange={(e) => setExpertise(e.target.value)}
+            name="expertise"
+            disabled={!editMode}
+          >
+            <option value="Bug solving">Bug solving</option>
+            <option value="Tech career assistance">
+              Tech career assistance
+            </option>
+            <option value="Academic support">Academic support</option>
+          </select>
+        </div>
       </div>
       {error && (
         <div className=" w-full text-center">
