@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { studentLogin } from "../../api/studentapi";
-import { useDispatch } from 'react-redux';
-import { setAuthToken } from "../../../redux/studentSlice";
+import { useDispatch } from "react-redux";
+import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 const StudentLogin = () => {
@@ -10,13 +10,14 @@ const StudentLogin = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
     setInputs({
-      ...inputs, [e.target.name]: e.target.value
+      ...inputs,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -24,16 +25,17 @@ const StudentLogin = () => {
     e.preventDefault();
     try {
       const response = await studentLogin(inputs);
-      if (response.status === 200) {  
+      if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
+        dispatch(setStudentData(response.data));
         setInputs({
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         });
         navigate("/studenthome");
       } else {
-        alert('Error while logging in');
+        alert("Error while logging in");
       }
     } catch (error) {
       alert(error.response.data.message);
@@ -41,17 +43,24 @@ const StudentLogin = () => {
   };
 
   return (
-    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-black' :' bg-white '} `} >
-      <motion.div 
+    <div
+      className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${
+        isDarkMode ? "bg-custom-gradient text-black" : " bg-white "
+      } `}
+    >
+      <motion.div
         className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        
-        <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-black' }` }>
-          <motion.form 
-            onSubmit={handleSubmit} 
+        <div
+          className={`flex-[1.5] flex flex-col  p-10 ${
+            isDarkMode ? " bg-card-custom-gradient " : " bg-teal-500 text-black"
+          }`}
+        >
+          <motion.form
+            onSubmit={handleSubmit}
             className="flex flex-col items-center w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -76,9 +85,14 @@ const StudentLogin = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <a href="/studentforget" className="text-md font-medium text-white hover:text-green-700">Forget password?</a>
-            <motion.button 
-              type="submit" 
+            <a
+              href="/studentforget"
+              className="text-md font-medium text-white hover:text-green-700"
+            >
+              Forget password?
+            </a>
+            <motion.button
+              type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -87,11 +101,17 @@ const StudentLogin = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${isDarkMode ? 'bg-card-custom-gradient' :' bg-teal-500 text-white'}`}>
-          <h1 className="text-white text-2xl font-[serif]">Do not have an account?</h1>
-          <Link to='/studentsignup'>
-            <motion.button 
-              type="button" 
+        <div
+          className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${
+            isDarkMode ? "bg-card-custom-gradient" : " bg-teal-500 text-white"
+          }`}
+        >
+          <h1 className="text-white text-2xl font-[serif]">
+            Do not have an account?
+          </h1>
+          <Link to="/studentsignup">
+            <motion.button
+              type="button"
               className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

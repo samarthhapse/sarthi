@@ -5,8 +5,10 @@ import {
   getAllExperts,
   login,
   register,
+  updateExpertDetails
 } from "../controllers/expert-controller.js";
 import { upload } from "../middleware/multer.js";
+import isAuthenticated from "../middleware/isAuthenticated.js";
 
 const router = express.Router();
 router.post(
@@ -23,5 +25,6 @@ router.post("/login", login);
 router.post("/resetpassword", changePassword);
 router.get("/:id", expertDetails);
 router.get("/", getAllExperts);
+router.post("/update", isAuthenticated, updateExpertDetails);
 
 export default router;
