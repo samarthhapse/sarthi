@@ -53,7 +53,7 @@ const StudentSignup = () => {
       >
         
         <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-black' }` }>
-        <div className="flex justify-start items-start pb-6 text-2xl font-bold"><h1 className=" text-green-400">Sarthi</h1></div>
+        <div className="flex justify-start items-start pb-6 text-2xl font-bold"><h1 className=" text-green-400">sarthi</h1></div>
           <motion.form
             onSubmit={handleSubmit}
             className="flex flex-col items-center w-full"
