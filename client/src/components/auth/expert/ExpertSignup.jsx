@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import image1  from "../../../assets/img1.png";
+import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 const ExpertSignup = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ const ExpertSignup = () => {
   const [preview, setPreview] = useState(null);
   const avatarInputRef = useRef(null);
   const [error, setError] = useState(null);
-
+  const [showpassword,setShowpassword]=useState()
+  const [confirmPassword,setConfirmPassword]=useState()
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -164,8 +166,9 @@ const ExpertSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
+            <label className="relative">
             <input
-              type="password"
+              type={showpassword?"text":"password"}
               placeholder="Password"
               name="password"
               onChange={handleChange}
@@ -173,8 +176,17 @@ const ExpertSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
+            <span 
+            onClick={()=>setShowpassword((prev)=>!prev)}
+            className="absolute right-3 top-[17px] z-[10] cursor-pointer">
+              {showpassword?
+              (<AiOutlineEyeInvisible fontSize={24} fill="#000000"/>):
+              (<AiOutlineEye fontSize={24} fill="#000000"/>)}
+            </span>
+            </label>
+            <label className="relative">
             <input
-              type="password"
+              type={confirmPassword?"text":"password"}
               placeholder="Confirm password"
               name="confirmPassword"
               onChange={handleChange}
@@ -182,6 +194,13 @@ const ExpertSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
+            <span onClick={()=>setConfirmPassword((prev)=>!prev)}
+              className="absolute right-3 top-[17px] z-[10] cursor-pointer">
+              {confirmPassword?
+              (<AiOutlineEyeInvisible fontSize={24} fill="#000000"/>):
+              (<AiOutlineEye fontSize={24} fill="#000000"/>)}
+            </span>
+            </label>
             <div className="mb-4 mr-32">
               <div className="mr-40">
                 <h3 className="text-md font-md mb-2">Expertise:</h3>

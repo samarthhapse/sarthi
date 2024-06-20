@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import image1  from "../../../assets/img1.png";
 import { useTheme } from "../../providers/ThemeProvider";
+import { AiOutlineEyeInvisible,AiOutlineEye } from "react-icons/ai";
 const StudentSignup = () => {
   const navigate = useNavigate();
   const { isDarkMode } = useTheme();
@@ -14,7 +15,8 @@ const StudentSignup = () => {
     password: '',
     confirmPassword: '',
   });
-
+  const[showpassword,setShowPassword]=useState()
+  const[showconfirmPassword,setshowConfirmPassword]=useState()
   const handleChange = (e) => {
     setInputs({
       ...inputs, [e.target.name]: e.target.value
@@ -90,8 +92,9 @@ const StudentSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
+            <label className="relative">
             <input
-              type="password"
+              type={showpassword?"text":"password"}
               placeholder="Password"
               name="password"
               onChange={handleChange}
@@ -99,8 +102,16 @@ const StudentSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
+            <span 
+            onClick={()=>setShowPassword((prev)=>!prev)}
+              className="absolute right-3 top-[17px] z-[10] cursor-pointer">
+              {showpassword?(<AiOutlineEyeInvisible fontSize={24} fill="#000000"/>)
+              :(<AiOutlineEye fontSize={24} fill="#000000"/>)}
+            </span>
+            </label>
+            <label className="relative">
             <input
-              type="password"
+              type={showconfirmPassword?"text":"password"}
               placeholder="Confirm password"
               name="confirmPassword"
               onChange={handleChange}
@@ -108,6 +119,14 @@ const StudentSignup = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50 text-black"
             />
+            <span 
+            onClick={()=>{setshowConfirmPassword((prev)=>!prev)}}
+            className="absolute right-3 top-[17px] z-[10] cursor-pointer">
+              {showconfirmPassword ? 
+              (<AiOutlineEyeInvisible fontSize={24} fill="#000000"/>):
+              (<AiOutlineEye fontSize={24} fill="#000000"/>)}
+            </span>
+            </label>
             <motion.button
               type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"

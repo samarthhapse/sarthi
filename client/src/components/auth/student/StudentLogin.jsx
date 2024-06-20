@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import { setAuthToken } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
+import { AiOutlineEyeInvisible,AiOutlineEye } from "react-icons/ai";
 const StudentLogin = () => {
   const dispatch = useDispatch();
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
+  const [showpassword,setShowPassword]=useState()
   const [inputs, setInputs] = useState({
     email: '',
     password: '',
@@ -67,8 +69,9 @@ const StudentLogin = () => {
               required
               className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
+            <label className="relative">
             <input
-              type="password"
+              type={showpassword?"text":"password"}
               placeholder="Password"
               name="password"
               onChange={handleChange}
@@ -76,6 +79,14 @@ const StudentLogin = () => {
               required
               className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
+            <span
+            onClick={()=>setShowPassword((prev)=>!prev)}
+            className="absolute right-3 top-[17px] z-[10] cursor-pointer">
+              {showpassword?
+              (<AiOutlineEyeInvisible fontSize={24} fill="#000000"/>):
+              (<AiOutlineEye  fontSize={24} fill="#000000"/>)}
+            </span>
+            </label>
             <a href="/studentforget" className="text-md font-medium text-white hover:text-green-700">Forget password?</a>
             <motion.button 
               type="submit" 
