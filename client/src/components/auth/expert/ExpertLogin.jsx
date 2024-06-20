@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { expertLogin } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setExpertData } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+
 const ExpertLogin = () => {
   const dispatch = useDispatch();
   const { isDarkMode } = useTheme();
@@ -13,6 +15,7 @@ const ExpertLogin = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setInputs({
@@ -41,6 +44,10 @@ const ExpertLogin = () => {
       console.log(error);
       alert(error.response.data.message);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -77,15 +84,28 @@ const ExpertLogin = () => {
               required
               className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={inputs.password}
-              required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+            <div className="relative w-[370px] mb-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={inputs.password}
+                required
+                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
+              <button
+                type="button"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <IoEyeOffOutline size={24} />
+                ) : (
+                  <IoEyeOutline size={24} />
+                )}
+              </button>
+            </div>
             <a
               href="/expertforget"
               className="text-md font-medium text-gray-950 hover:text-gray-700"
@@ -127,3 +147,4 @@ const ExpertLogin = () => {
 };
 
 export default ExpertLogin;
+
