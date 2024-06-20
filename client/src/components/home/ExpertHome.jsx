@@ -30,6 +30,7 @@ const ExpertHome = () => {
   const editClick = () => {
     setEditMode(true);
   };
+
   const saveClick = async () => {
     setLoading(true);
 
@@ -38,7 +39,7 @@ const ExpertHome = () => {
       setLoading(false);
       return;
     }
-    const userData = {...inputs, expertise} 
+    const userData = { ...inputs, expertise };
     const response = await updateExpertDetails(token, userData).catch((err) => {
       console.log(err.response);
       setError(err.response.data.message);
@@ -72,8 +73,7 @@ const ExpertHome = () => {
             value={expertise}
             onChange={(e) => setExpertise(e.target.value)}
             name="expertise"
-            disabled={!editMode}
-          >
+            disabled={!editMode}>
             <option value="Bug solving">Bug solving</option>
             <option value="Tech career assistance">
               Tech career assistance
@@ -91,15 +91,13 @@ const ExpertHome = () => {
         <button
           className="w-40 h-10 rounded-md bg-green-500  mx-6 mb-4"
           disabled={loading}
-          onClick={saveClick}
-        >
+          onClick={saveClick}>
           Save
         </button>
       ) : (
         <button
           className="w-40 h-10 rounded-md bg-blue-500 mx-6 mb-4"
-          onClick={editClick}
-        >
+          onClick={editClick}>
           Edit
         </button>
       )}

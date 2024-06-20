@@ -19,6 +19,7 @@ import OtpVerifyStudent from "./components/auth/student/OtpVerify-student";
 import OtpVerifyExpert from "./components/auth/expert/OtpVerify-expert";
 import PageNotFound from "./components/Basic/PageNotFound";
 import Navbar from "./components/Basic/Navbar";
+import ExpertProfile from "./components/profile/expert/expertprofile";
 
 function App() {
   // const { theme } = useContext(ThemeContext);
@@ -36,6 +37,7 @@ function App() {
           <Route path="/studentforget" element={<StudentForget />} />
           <Route path="/expertsignup" element={<ExpertSignup />} />
           <Route path="/expertlogin" element={<ExpertLogin />} />
+          <Route path="/expertprofile" element={<ExpertProfile />} />
           <Route path="/expertforget" element={<ExpertForget />} />
           <Route path="/otpverifystudent" element={<OtpVerifyStudent />} />
           <Route path="/otpverifyexpert" element={<OtpVerifyExpert />} />

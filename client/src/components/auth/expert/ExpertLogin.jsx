@@ -6,6 +6,7 @@ import { setAuthToken, setExpertData } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { account, client } from "../../utils/appwrite";
+import Cookies from "js-cookie";
 
 const ExpertLogin = () => {
   const dispatch = useDispatch();
@@ -29,22 +30,30 @@ const ExpertLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await expertLogin(inputs);
+      const response = await expertLogin(inputs); // Corrected API call
+      console.log("The Response.data.token is: ", response.data.token);
+
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
-        dispatch(setExpertData(response.data.userData));
+        dispatch(setExpertData(response.data)); // Corrected dispatch
+
+        // Set cookies
+        Cookies.set("authToken", response.data.token, { expires: 7 });
+        Cookies.set("expertData", JSON.stringify(response.data), {
+          expires: 7,
+        }); // Corrected cookie name
+
         setInputs({
           email: "",
           password: "",
         });
-        navigate("/experthome");
+        navigate("/experthome"); // Corrected navigation
       } else {
-        alert("error while logging");
+        alert("Error while logging in");
       }
     } catch (error) {
-      console.log(error);
-      alert(error.response.data.message);
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -55,10 +64,9 @@ const ExpertLogin = () => {
       // Authenticating using the AppWrite
       await account.createOAuth2Session(
         "google",
-        "http://localhost:5173/experthome",
+        "http://localhost:5173/expertprofile",
         "http://localhost:5173/fail"
       );
-
       const user = await getGoogleLoginUser();
 
       // Checking if we got the User or not from the Goole Login
@@ -72,24 +80,36 @@ const ExpertLogin = () => {
         email: user.email,
         GoogleLogin: true,
       };
-      const response = await expertLogin(data);
+
+      const response = await expertLogin(data); // Corrected API call
+      console.log("The Response.data.token is: ", response.data.token);
 
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
-        dispatch(setExpertData(response.data.userData));
+        dispatch(setExpertData(response.data.userData)); // Corrected dispatch
+
+        // Set cookies
+        Cookies.set("authToken", response.data.token, { expires: 7 });
+        Cookies.set("expertData", JSON.stringify(response.data.userData), {
+          expires: 7,
+        }); // Corrected cookie name
+
+        const authTokenGot = await Cookies.get("authToken");
+        console.log("The AuthToken is: ", authTokenGot);
+        alert("Testing message for auth token seeing");
+
         setInputs({
           email: "",
           password: "",
         });
-        navigate("/experthome");
       } else {
         alert(response.data.message);
       }
     } catch (error) {
       alert(
         "There was an error while handling the Google login: " +
-          error.response.data.message
+          (error.response?.data?.message || "Google login failed")
       );
     }
   };

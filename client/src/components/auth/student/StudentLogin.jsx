@@ -6,6 +6,7 @@ import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { account, client } from "../../utils/appwrite";
+import Cookies from "js-cookie";
 
 const StudentLogin = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const StudentLogin = () => {
     e.preventDefault();
     try {
       const response = await studentLogin(inputs);
+      console.log("HI This is response.data.token : ", response.data);
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
@@ -66,6 +68,7 @@ const StudentLogin = () => {
       };
 
       const response = await studentLogin(data);
+      console.log("HI This is response.data: ", response.data.token);
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));

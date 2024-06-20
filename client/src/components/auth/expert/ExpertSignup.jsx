@@ -64,7 +64,7 @@ const ExpertSignup = () => {
     inputs.avatar = image;
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/otp/sendotp",
+        "http://localhost:5001/api/v1/otp/sendotp",
         { email: inputs.email }
       );
       alert(response.data.message);
@@ -170,7 +170,7 @@ const ExpertSignup = () => {
     } catch (err) {
       console.log("Error Message is: ", err);
       return {
-        message: "There was an error while Fetching the Google Dataß",
+        message: "There was an error while Fetching the Google Data",
       };
     }
   };
