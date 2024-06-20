@@ -136,18 +136,22 @@ export const login = async (req, res) => {
       userId: user._id,
     };
 
-    const token = await jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
     });
+    const userData = await Expert.findById(user._id).select("-password");
 
     if (!token) {
       return res
         .status(500)
         .json({ message: "internal server error", success: false });
     }
-    return res
-      .status(200)
-      .json({ token: token, message: "logged in successful.", success: true });
+    return res.status(200).json({
+      token,
+      userData,
+      message: "logged in successful.",
+      success: true,
+    });
   } catch (err) {
     return res
       .status(500)
@@ -226,4 +230,23 @@ export const getAllExperts = async (req, res) => {
       .status(500)
       .json({ message: "internal server error", err, success: false });
   }
+};
+
+export const updateExpertDetails = async (req, res) => {
+  const userId = req.id;
+  if (!userId) {
+    return res
+      .status(401)
+      .json({ message: "unauthorized access", success: false });
+  }
+  const { updatedData } = req.body;
+  const user = await Expert.findByIdAndUpdate(
+    userId,
+    { $set: updatedData },
+    { new: true }
+  ).select("-password");
+  if (!user) {
+    return res.status(404).json({ message: "user not found", success: false });
+  }
+  return res.status(200).json({ user, success: true });
 };

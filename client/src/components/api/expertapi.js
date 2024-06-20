@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const API_URL = "http://localhost:5000/api/v1/expert";
 
@@ -12,3 +13,15 @@ export const expertChangePassword = (data) =>
 export const getExpertDetails = (id) => axios.get(`${API_URL}/${id}`);
 
 export const getAllExperts = () => axios.get(`${API_URL}/`);
+
+export const updateExpertDetails = (token, data) =>
+  axios.post(
+    `${API_URL}/update`,
+    { updatedData: data },
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Authorization: token,
+      },
+    }
+  );

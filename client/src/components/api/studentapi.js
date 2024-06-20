@@ -13,3 +13,4 @@ export const studentChangePassword = (data) =>
 export const getStudentDetails = (id) => axios.get(`${API_URL}/${id}`);
 
 export const getAllStudents = () => axios.get(`${API_URL}/`);
+
