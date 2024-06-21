@@ -207,7 +207,7 @@ export const expertDetails = async (req, res) => {
         .status(500)
         .json({ message: "internal server error", err, success: false });
     }
-    return res.status(200).json({ userDetails: user, success: true });
+    return res.status(200).json({ user, success: true });
   } catch (err) {
     return res
       .status(500)
