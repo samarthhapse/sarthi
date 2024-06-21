@@ -1,12 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { expertLogin } from "../../api/expertapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setExpertData } from "../../../redux/expertSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
-import { account, client } from "../../utils/appwrite";
+import { account } from "../../utils/appwrite";
 import Cookies from "js-cookie";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const ExpertLogin = () => {
   const dispatch = useDispatch();
@@ -14,11 +15,11 @@ const ExpertLogin = () => {
   const navigate = useNavigate();
 
   const [isGoogleLogin, setIsGoogleLogin] = useState(false);
-
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setInputs({
@@ -69,7 +70,7 @@ const ExpertLogin = () => {
       );
       const user = await getGoogleLoginUser();
 
-      // Checking if we got the User or not from the Goole Login
+      // Checking if we got the User or not from the Google Login
       if (!user || user.message) {
         alert("There was a problem in the Google Auth");
         return;
@@ -132,9 +133,8 @@ const ExpertLogin = () => {
     console.log("Error Have Been caught");
   };
 
-  const HandleGoogleLogout = async () => {
-    await account.deleteSession("current");
-    console.log("The User Have Been Logout Successfully");
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -167,23 +167,33 @@ const ExpertLogin = () => {
               required={!isGoogleLogin}
               className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={inputs.password}
-              required={!isGoogleLogin}
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+            <div className="relative w-[370px] mb-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={inputs.password}
+                required
+                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
+              <button
+                type="button"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <IoEyeOffOutline size={24} />
+                ) : (
+                  <IoEyeOutline size={24} />
+                )}
+              </button>
+            </div>
             <a
               href="/expertforget"
               className="text-md font-medium text-gray-950 hover:text-gray-700">
               Forget password?
             </a>
-            {
-              // Buttons For Login in With Google and Normal one
-            }
             <div className="flex space-x-4">
               <motion.button
                 type="button"

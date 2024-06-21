@@ -41,43 +41,43 @@ const Navbar = () => {
           <div>
             <button
               onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}
-              className="mx-4 md:mx-8 flex items-center hover:text-gray-700 transition duration-300"
-            >
-              Features <FaChevronDown className="ml-1 mt-[6px]" />
-            </button>
+              className="mx-4 md:mx-8 flex items-center hover:text-gray-700 transition duration-300">
+            
+              Features 
+            </button> 
             {isFeaturesOpen && (
-              <div className="absolute bg-gray-100 shadow-lg rounded-lg mt-2 p-4 w-64 overflow-visible">
-                <div className="hover:bg-gray-400 p-2 cursor-pointer flex items-center">
+              <div className="">
+                {/* <div className="hover:bg-gray-400 p-2 cursor-pointer flex items-center">
                   <FiBox className="mr-3" />
                   <div>
                     <p className="font-bold">Create & Integrate</p>
                     <p className="text-sm text-gray-600">Option A description</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <FiFilm className="mr-3" />
                   <div>
                     <p className="font-bold">Welcome Studio</p>
                     <p className="text-sm text-gray-600">Option B description</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <FiPenTool className="mr-3" />
                   <div>
                     <p className="font-bold">Content Creator</p>
                     <p className="text-sm text-gray-600">Option C description</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center text-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center text-center">
                   <div>
                     <p className="font-bold ml-7">See all Features</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <div>
                     <p className="font-bold">Take the Interactive Tour</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
@@ -93,31 +93,31 @@ const Navbar = () => {
               onClick={() => setIsResourcesOpen(!isResourcesOpen)}
               className="mx-4 md:mx-8 flex items-center hover:text-gray-700 transition duration-300"
             >
-              Resources <FaChevronDown className="ml-1 mt-[6px]" />
+              Resources 
             </button>
             {isResourcesOpen && (
-              <div className="absolute bg-pink-100 shadow-lg rounded-lg mt-2 p-4 w-64 overflow-visible">
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+              <div className="">
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <FiBox className="mr-3" />
                   <div>
                     <p className="font-bold">Option A</p>
                     <p className="text-sm text-gray-600">Description A</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <FiFilm className="mr-3" />
                   <div>
                     <p className="font-bold">Option B</p>
                     <p className="text-sm text-gray-600">Description B</p>
                   </div>
-                </div>
-                <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
+                </div> */}
+                {/* <div className="hover:bg-gray-200 p-2 cursor-pointer flex items-center">
                   <FiPenTool className="mr-3" />
                   <div>
                     <p className="font-bold">Option C</p>
                     <p className="text-sm text-gray-600">Description C</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             )}
           </div>

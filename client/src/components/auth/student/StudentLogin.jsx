@@ -1,11 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { studentLogin } from "../../api/studentapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
-import { account, client } from "../../utils/appwrite";
+import { account } from "../../utils/appwrite";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import Cookies from "js-cookie";
 
 const StudentLogin = () => {
@@ -16,7 +17,7 @@ const StudentLogin = () => {
     email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const [isGoogleLogin, setIsGoogleLogin] = useState(false);
 
   const handleChange = (e) => {
@@ -30,7 +31,6 @@ const StudentLogin = () => {
     e.preventDefault();
     try {
       const response = await studentLogin(inputs);
-      console.log("HI This is response.data.token : ", response.data);
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
@@ -68,16 +68,15 @@ const StudentLogin = () => {
       };
 
       const response = await studentLogin(data);
-      console.log("HI This is response.data: ", response.data.token);
       if (response.status === 200) {
         alert(response.data.message);
         dispatch(setAuthToken(response.data.token));
-        dispatch(setExpertData(response.data.userData));
+        dispatch(setStudentData(response.data.userData));
         setInputs({
           email: "",
           password: "",
         });
-        navigate("/experthome");
+        navigate("/studenthome");
       } else {
         alert(response.data.message);
       }
@@ -101,17 +100,14 @@ const StudentLogin = () => {
 
   const renderProfileScreen = async (user) => {
     console.log(user);
-    // Add logic to render profile screen
   };
 
   const renderLoginScreen = async () => {
     console.log("Error Have Been caught");
-    // Add logic to render login screen
   };
 
-  const HandleGoogleLogout = async () => {
-    await account.deleteSession("current");
-    console.log("The User Have Been Logout Successfully");
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -144,26 +140,35 @@ const StudentLogin = () => {
               required={!isGoogleLogin}
               className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={inputs.password}
-              required={!isGoogleLogin}
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+            <div className="relative w-[370px] mb-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={inputs.password}
+                required={!isGoogleLogin}
+                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
+              <button
+                type="button"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                onClick={togglePasswordVisibility}>
+                {showPassword ? (
+                  <IoEyeOffOutline size={24} />
+                ) : (
+                  <IoEyeOutline size={24} />
+                )}
+              </button>
+            </div>
             <a
               href="/studentforget"
               className="text-md font-medium text-white hover:text-green-700">
               Forget password?
             </a>
-            {
-              // Buttons For Login in With Google and Normal one
-            }
             <div className="flex space-x-4">
               <motion.button
-                type="button" // Use type="button" to prevent form submission
+                type="button"
                 className="bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

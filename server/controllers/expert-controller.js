@@ -232,7 +232,7 @@ export const expertDetails = async (req, res) => {
         success: false,
       });
     }
-    return res.status(200).json({ userDetails: user, success: true });
+    return res.status(200).json({ user, success: true });
   } catch (err) {
     return res
       .status(500)
