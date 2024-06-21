@@ -1,10 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { studentLogin } from "../../api/studentapi";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+
 const StudentLogin = () => {
   const dispatch = useDispatch();
   const { isDarkMode } = useTheme();
@@ -13,6 +15,7 @@ const StudentLogin = () => {
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setInputs({
@@ -40,6 +43,10 @@ const StudentLogin = () => {
     } catch (error) {
       alert(error.response.data.message);
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -76,15 +83,28 @@ const StudentLogin = () => {
               required
               className="w-[370px] py-4 px-6 mb-8 mt-10 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
             />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={inputs.password}
-              required
-              className="w-[370px] py-4 px-6 mb-4 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
-            />
+            <div className="relative w-[370px] mb-4">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={inputs.password}
+                required
+                className="w-full py-4 px-6 text-sm bg-gray-100 border border-gray-300 rounded-lg outline-none transition-all focus:border-teal-500 focus:ring focus:ring-teal-500 focus:ring-opacity-50"
+              />
+              <button
+                type="button"
+                className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-500"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? (
+                  <IoEyeOffOutline size={24} />
+                ) : (
+                  <IoEyeOutline size={24} />
+                )}
+              </button>
+            </div>
             <a
               href="/studentforget"
               className="text-md font-medium text-white hover:text-green-700"
@@ -126,3 +146,5 @@ const StudentLogin = () => {
 };
 
 export default StudentLogin;
+
+
