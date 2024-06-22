@@ -29,6 +29,7 @@ const sendOTP = async (req, res) => {
       lowerCaseAlphabets: false,
       specialChars: false,
     });
+    console.log("otp is: ", otp);
     let result = await OTP.findOne({ otp });
     while (result) {
       let otp = otpGenerator.generate(6, {
@@ -43,19 +44,22 @@ const sendOTP = async (req, res) => {
       otp,
     });
     if (!otpSent) {
-      return res
-        .status(500)
-        .json({ message: "internal server error", success: false, err });
+      return res.status(500).json({
+        message: "internal server error",
+        success: false,
+        err,
+      });
     }
 
     // now sending otp using nodeMailer
-
-    const info = await sendMail({receiver:email, otp})
+    const info = await sendMail({ receiver: email, otp });
     if (!info) {
       console.log("something went wrong while sending email");
-      return res
-        .status(500)
-        .json({ message: "internal server error", success: false, err });
+      return res.status(500).json({
+        message: "internal server error",
+        success: false,
+        err,
+      });
     }
 
     return res.status(200).json({

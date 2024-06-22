@@ -37,12 +37,13 @@ function App() {
           <Route path="/studentforget" element={<StudentForget />} />
           <Route path="/expertsignup" element={<ExpertSignup />} />
           <Route path="/expertlogin" element={<ExpertLogin />} />
+          <Route path="/expertprofile" element={<ExpertProfile />} />
           <Route path="/expertforget" element={<ExpertForget />} />
           <Route path="/otpverifystudent" element={<OtpVerifyStudent />} />
           <Route path="/otpverifyexpert" element={<OtpVerifyExpert />} />
           <Route path="/events" element={<HomePage />} />
           <Route path="/pricing" element={<HomePage />} />
-          <Route path="/expert/:id" element={<ExpertProfile/>} />
+          <Route path="/expert/:id" element={<ExpertProfile />} />
 
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
