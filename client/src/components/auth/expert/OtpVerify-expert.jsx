@@ -81,8 +81,7 @@ const OtpVerify = () => {
           <Link to="/studentsignup">
             <button
               type="button"
-              className="mt-4 md:mt-6 bg-white text-teal-500 font-bold text-sm md:text-md py-2 px-4 md:px-6 rounded-full transition-all hover:bg-gray-100"
-            >
+              className="mt-4 md:mt-6 bg-white text-teal-500 font-bold text-sm md:text-md py-2 px-4 md:px-6 rounded-full transition-all hover:bg-gray-100">
               Back
             </button>
           </Link>
@@ -90,8 +89,7 @@ const OtpVerify = () => {
         <div className="flex-[1.5] flex flex-col items-center justify-center bg-white p-6 md:p-10">
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center w-full"
-          >
+            className="flex flex-col items-center w-full">
             <h1 className="text-2xl md:text-4xl font-serif mb-6 md:mb-10">
               OTP verification
             </h1>
@@ -114,8 +112,7 @@ const OtpVerify = () => {
             <button
               type="submit"
               className="mt-2 bg-teal-500 text-white font-bold text-sm md:text-md py-2 px-6 md:py-3 md:px-8 rounded-full transition-all hover:bg-teal-600"
-              disabled={timeLeft === 0}
-            >
+              disabled={timeLeft === 0}>
               Submit
             </button>
           </form>

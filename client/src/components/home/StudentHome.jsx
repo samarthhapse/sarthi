@@ -1,60 +1,72 @@
 import React, { useEffect, useState } from "react";
-import ExpertiseCard from "./studentHome/ExpertiseCard";
+// import ExpertiseCard from "./studentHome/ExpertiseCard";
 import ExpertCard from "./studentHome/ExpertCard";
 import { getAllExperts } from "../api/expertapi";
+// import FilterComponent from "./studentHome/Filter";
 
 const StudentHome = () => {
-  const [selectedExpertise, setSelectedExpertise] = useState(null);
+  const [selectedExpertise, setSelectedExpertise] = useState("All");
   const [experts, setExperts] = useState();
+  const [allExperts, setAllExperts] = useState([]);
 
-  const handleClick = async (value) => {
-    setSelectedExpertise(value);
-    await getExperts(value);
-    console.log(value);
+  const handleChange = (event) => {
+    setSelectedExpertise(event.target.value);
   };
 
-  const getExperts = async (value) => {
-    if (!value) {
-      return;
-    }
-
-    const response = await getAllExperts()
-    const { data } = response;
-    const experts = data.user.filter((expert) => expert.expertise === value);
-    console.log(experts);
-    setExperts(experts);
-  };
   useEffect(() => {
-    if (!selectedExpertise) {
+    const fetchExperts = async () => {
+      try {
+        const response = await getAllExperts();
+        const { data } = response;
+
+        setAllExperts(data.user);
+        setExperts(data.user);
+      } catch (error) {
+        console.error("Failed to fetch experts", error);
+      }
+    };
+    console.log("start fetch");
+    fetchExperts();
+    console.log();
+  }, []);
+
+  useEffect(() => {
+    if (selectedExpertise === "All") {
+      setExperts(allExperts);
       return;
     }
+    const expert = allExperts.filter(
+      (expert) => expert.expertise == selectedExpertise
+    );
+    setExperts(expert);
   }, [selectedExpertise]);
+
   return (
     <>
-      {!experts ? (
-        <div className=" bg-white w-screen min-h-screen flex flex-col justify-center items-center ">
-          <div className="mb-10">
-            <p className=" text-4xl">
-              {" "}
-              Welcome, Choose an expertise to get help
-            </p>
-          </div>
-          <div className="flex gap-8">
-            <ExpertiseCard value="Bug solving" handleClick={handleClick} />
-            <ExpertiseCard
-              value="Tech career assistance"
-              handleClick={handleClick}
-            />
-            <ExpertiseCard value="Academic support" handleClick={handleClick} />
-          </div>
-        </div>
-      ) : (
-        <div className="w-screen h-screen p-10 flex gap-8 flex-wrap">
-          {experts?.map((expert) => (
-            <ExpertCard expert={expert} key={expert._id} />
-          ))}
-        </div>
-      )}
+      {/* <FilterComponent/> */}
+      <div className="flex flex-col items-center space-y-4 mt-4">
+        <label htmlFor="exp-selector" className="text-xl font-medium">
+          Select an expertise:
+        </label>
+        <select
+          name="expertise"
+          id="exp-selector"
+          className="rounded-md px-4 py-2 w-64 bg-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          value={selectedExpertise}
+          onChange={handleChange}
+        >
+          <option value="All">All</option>
+          <option value="Tech career assistance">Tech career assistance</option>
+          <option value="Bug solving">Bug solving</option>
+          <option value="Academic support">Academic support</option>
+        </select>
+      </div>
+
+      <div className="w-screen  p-10 flex gap-8 flex-wrap">
+        {experts?.map((expert) => (
+          <ExpertCard expert={expert} key={expert._id} />
+        ))}
+      </div>
     </>
   );
 };

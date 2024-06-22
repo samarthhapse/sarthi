@@ -7,7 +7,8 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 export const register = async (req, res) => {
   try {
-    console.log("request", req.files);
+    // console.log("request: ", req.files);
+    console.log("request: ", req.files);
     let user, checkStudent;
     const {
       name,
@@ -19,24 +20,31 @@ export const register = async (req, res) => {
       password,
       confirmPassword,
       otp,
+      avatar,
+      GoogleLogin,
     } = req.body;
-    if (
-      !name ||
-      !password ||
-      !confirmPassword ||
-      !phoneNo ||
-      !expertise ||
-      !field ||
-      !jobTitle
-    ) {
-      return res
-        .status(400)
-        .json({ message: "All fields are required", success: false });
-    }
-    if (password !== confirmPassword) {
-      return res
-        .status(400)
-        .json({ message: "Password do not match", success: false });
+    console.log("Req.body ", req.body);
+    if (!GoogleLogin) {
+      if (
+        !name ||
+        !password ||
+        !confirmPassword ||
+        !phoneNo ||
+        !expertise ||
+        !field ||
+        !jobTitle
+      ) {
+        return res.status(400).json({
+          message: "All fields are required",
+          success: false,
+        });
+      }
+
+      if (password !== confirmPassword) {
+        return res
+          .status(400)
+          .json({ message: "Password do not match", success: false });
+      }
     }
     user = await Expert.findOne({ email });
     checkStudent = await Student.findOne({ email });
@@ -46,52 +54,66 @@ export const register = async (req, res) => {
         success: false,
       });
     }
+    if (!GoogleLogin) {
+      const recentOtp = await OTP.findOne({ email })
+        .sort({ createdAt: -1 })
+        .limit(1);
+      if (recentOtp.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "OTP Not Found!",
+        });
+      }
+      if (otp !== recentOtp.otp) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid OTP",
+        });
+      }
 
-    const recentOtp = await OTP.findOne({ email })
-      .sort({ createdAt: -1 })
-      .limit(1);
-    if (recentOtp.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: "OTP Not Found!",
-      });
-    }
-    if (otp !== recentOtp.otp) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid OTP",
-      });
-    }
+      const avatarLocalPath = req.files?.avatar[0]?.path;
+      if (!avatarLocalPath) {
+        console.log("avatarLocalPath not found");
+        return res.status(401).json({
+          success: false,
+          message: "Avatar is required",
+        });
+      }
+      console.log(avatarLocalPath);
+      const avatar = await uploadOnCloudinary(avatarLocalPath);
+      if (!avatar) {
+        console.log("avatar not uploaded on cloudinary");
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
-    if (!avatarLocalPath) {
-      console.log("avatarLocalPath not found");
-      return res.status(401).json({
-        success: false,
-        message: "Avatar is required",
-      });
-    }
-    console.log(avatarLocalPath);
-    const avatar = await uploadOnCloudinary(avatarLocalPath);
-    if (!avatar) {
-      console.log("avatar not uploaded on cloudinary");
-
-      return res.status(401).json({
-        success: false,
-        message: "Avatar is required",
-      });
+        return res.status(401).json({
+          success: false,
+          message: "Avatar is required",
+        });
+      }
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    user = await Expert.create({
-      name,
-      email,
-      phoneNo,
-      password: hashedPassword,
-      expertise,
-      field,
-      jobTitle,
-      avatar: avatar.url,
-    });
+    if (!GoogleLogin) {
+      user = await Expert.create({
+        name,
+        email,
+        phoneNo,
+        password: hashedPassword,
+        expertise,
+        field,
+        jobTitle,
+        avatar: avatar.url,
+      });
+    } else {
+      user = await Expert.create({
+        name,
+        email,
+        phoneNo,
+        password: hashedPassword,
+        expertise,
+        field,
+        jobTitle,
+        avatar,
+      });
+    }
     if (!user) {
       console.log("user not created in database");
       return res
@@ -103,7 +125,7 @@ export const register = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    console.log("error while registering", err);
+    console.log("error while registering ", err);
     return res
       .status(500)
       .json({ message: "internal server error", err, success: false });
@@ -112,50 +134,51 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res
-        .status(400)
-        .json({ message: "All fields are required", success: false });
+    const { email, password, GoogleLogin } = req.body;
+
+    if (!email || (!GoogleLogin && !password)) {
+      return res.status(400).json({
+        message: "All fields are required",
+        success: false,
+      });
     }
+
     const user = await Expert.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        message: "Incorrect username or password",
+        message: "No user with the given email. Try signing up",
         success: false,
       });
     }
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
-    if (!isPasswordMatch) {
-      return res.status(400).json({
-        message: "Incorrect username or password",
-        success: false,
-      });
-    }
-    const tokenData = {
-      userId: user._id,
-    };
 
+    if (!GoogleLogin) {
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch) {
+        return res.status(400).json({
+          message: "Incorrect username or password",
+          success: false,
+        });
+      }
+    }
+
+    const tokenData = { userId: user._id };
     const token = jwt.sign(tokenData, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
     });
     const userData = await Expert.findById(user._id).select("-password");
 
-    if (!token) {
-      return res
-        .status(500)
-        .json({ message: "internal server error", success: false });
-    }
     return res.status(200).json({
       token,
       userData,
-      message: "logged in successful.",
+      message: "Logged in successfully.",
       success: true,
     });
   } catch (err) {
-    return res
-      .status(500)
-      .json({ message: "internal server error", err, success: false });
+    return res.status(500).json({
+      message: "Internal server error",
+      err,
+      success: false,
+    });
   }
 };
 
@@ -203,11 +226,13 @@ export const expertDetails = async (req, res) => {
   try {
     const user = await Expert.findById(userID).select("-password");
     if (!user) {
-      return res
-        .status(500)
-        .json({ message: "internal server error", err, success: false });
+      return res.status(500).json({
+        message: "internal server error",
+        err,
+        success: false,
+      });
     }
-    return res.status(200).json({ userDetails: user, success: true });
+    return res.status(200).json({ user, success: true });
   } catch (err) {
     return res
       .status(500)
@@ -219,9 +244,11 @@ export const getAllExperts = async (req, res) => {
   try {
     const user = await Expert.find().select("-password");
     if (!user) {
-      return res
-        .status(500)
-        .json({ message: "internal server error", err, success: false });
+      return res.status(500).json({
+        message: "internal server error",
+        err,
+        success: false,
+      });
     }
     return res.status(200).json({ user });
   } catch (err) {
