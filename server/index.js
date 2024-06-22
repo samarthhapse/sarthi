@@ -5,8 +5,10 @@ import connectDB from "./config/connection.js";
 import studentRoute from "./routes/studentRoute.js";
 import expertRoute from "./routes/expertRoute.js";
 import otpRoute from './routes/otpRoute.js';
-import chatRoutes from './routes/chatRoutes.js';
+import chatRoutes from './routes/chatRoute.js';
 import messageRoutes from './routes/messageRoute.js';
+import { Server } from "socket.io";
+
 dotenv.config({});
 
 const app = express();
@@ -23,13 +25,13 @@ app.use("/api/v1/chat", chatRoutes);
 app.use("/api/v1/message", messageRoutes);
 
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   connectDB().then(() => {
     console.log(`Server Listening on : http://localhost:${PORT}`);
   });
 });
 
-const io = require("socket.io")(server, {
+const io = new Server(server, {
   pingTimeout: 60000,
   cors: {
     origin: ["*"],

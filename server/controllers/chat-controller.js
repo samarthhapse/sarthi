@@ -1,8 +1,8 @@
 import asyncHandler from 'express-async-handler';
-import Chat from '../models/chat-model';
-import { Expert } from '../models/expert-model';
-import { Student } from '../models/student-model';
-import Message from '../models/message-model';
+import Chat from '../models/chat-model.js';
+import { Expert } from '../models/expert-model.js';
+import { Student } from '../models/student-model.js';
+import Message from '../models/message-model.js';
 
 // Helper function to determine user model
 const getUserModel = (userId) => {
@@ -13,21 +13,19 @@ const getUserModel = (userId) => {
 //@route           POST /api/chat/
 //@access          Protected
 export const accessChat = asyncHandler(async (req, res) => {
-  const { userId } = req.body;
-
+  const  userId  = req.body.userId;
   if (!userId) {
     console.log("UserId param not sent with request");
     return res.sendStatus(400);
   }
-
-  const userModel = await getUserModel(req.user._id);
+  const userModel = await getUserModel(req.body.user._id);
   const targetModel = await getUserModel(userId);
 
   try {
     let isChat = await Chat.find({
       isGroupChat: false,
       $and: [
-        { users: { $elemMatch: { $eq: req.user._id } } },
+        { users: { $elemMatch: { $eq: req.body.user._id } } },
         { users: { $elemMatch: { $eq: userId } } },
       ],
     })
@@ -45,7 +43,7 @@ export const accessChat = asyncHandler(async (req, res) => {
       const chatData = {
         chatName: "sender",
         isGroupChat: false,
-        users: [req.user._id, userId],
+        users: [req.body.user._id, userId],
       };
 
       const createdChat = await Chat.create(chatData);
@@ -66,9 +64,9 @@ export const accessChat = asyncHandler(async (req, res) => {
 //@access          Protected
 export const fetchChats = asyncHandler(async (req, res) => {
   try {
-    const userModel = await getUserModel(req.user._id);
+    const userModel = await getUserModel(req.body.user._id);
 
-    Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+    Chat.find({ users: { $elemMatch: { $eq: req.body.user._id } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
       .populate("latestMessage")
@@ -100,14 +98,14 @@ export const createGroupChat = asyncHandler(async (req, res) => {
     return res.status(400).send("More than 2 users are required to form a group chat");
   }
 
-  users.push(req.user._id);
+  users.push(req.body.user._id);
 
   try {
     const groupChat = await Chat.create({
       chatName: req.body.name,
       users: users,
       isGroupChat: true,
-      groupAdmin: req.user._id,
+      groupAdmin: req.body.user._id,
     });
 
     const fullGroupChat = await Chat.findOne({ _id: groupChat._id })

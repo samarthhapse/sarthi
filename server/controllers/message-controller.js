@@ -1,8 +1,8 @@
 import asyncHandler from 'express-async-handler';
-import Message from '../models/message-model';
-import Chat from '../models/chat-model';
-import { Student } from '../models/student-model';
-import { Expert } from '../models/expert-model';
+import Message from '../models/message-model.js';
+import Chat from '../models/chat-model.js';
+import { Student } from '../models/student-model.js';
+import { Expert } from '../models/expert-model.js';
 
 
 
@@ -13,9 +13,6 @@ const allMessages = asyncHandler(async (req, res) => {
       .populate({
         path: "sender",
         select: "name avatar email",
-        model: function(doc) {
-          return doc.senderModel;
-        }
       })
       .populate("chat");
     res.json(messages);
@@ -35,7 +32,7 @@ const sendMessage = asyncHandler(async (req, res) => {
   }
 
   const newMessage = {
-    sender: req.user._id,
+    sender: req.body.user._id,
     senderModel: senderModel,
     content: content,
     chat: chatId,
@@ -48,19 +45,13 @@ const sendMessage = asyncHandler(async (req, res) => {
       path: "sender",
       select: "name avatar",
       model: senderModel
-    }).execPopulate();
+    })
 
-    message = await message.populate("chat").execPopulate();
+    message = await message.populate("chat");
 
     message = await Chat.populate(message, {
       path: "chat.users",
       select: "name avatar email",
-      populate: {
-        path: 'userModels',
-        model: function(doc) {
-          return doc.userModels;
-        }
-      }
     });
 
     await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
