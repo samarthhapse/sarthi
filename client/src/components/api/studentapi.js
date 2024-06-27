@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const API_URL = "http://localhost:5001/api/v1/student";
+const API_URL = "http://localhost:5000/api/v1/student";
 
 export const studentRegister = (data) =>
     axios.post(`${API_URL}/register`, data, {
@@ -13,7 +13,7 @@ export const studentRegister = (data) =>
 export const studentLogin = async (data) => {
     try {
         const response = await axios.post(
-            "http://localhost:5001/api/v1/student/login",
+            "http://localhost:5000/api/v1/student/login",
             data
         );
         return response;

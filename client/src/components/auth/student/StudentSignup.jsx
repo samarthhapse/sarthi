@@ -39,7 +39,7 @@ const StudentSignup = () => {
                 return;
             }
             const response = await axios.post(
-                "http://localhost:5001/api/v1/otp/sendotp",
+                "http://localhost:5000/api/v1/otp/sendotp",
                 { email: inputs.email }
             );
             alert(response.data.message);
