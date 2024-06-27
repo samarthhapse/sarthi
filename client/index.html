@@ -8,6 +8,145 @@
   </head>
   <body>
     <div id="root"></div>
+    <title>Chat Feature</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Basic styling for the chat container */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        /* Styling for the chat box where messages are displayed */
+        .chat-box {
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+
+        /* Styling for each chat message */
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            width: fit-content;
+            max-width: 80%;
+        }
+
+        /* Different background for messages from the user and the expert */
+        .chat-message.user {
+            background-color: #d9edf7;
+            align-self: flex-end;
+        }
+
+        .chat-message.expert {
+            background-color: #fcf8e3;
+            align-self: flex-start;
+        }
+
+        /* Styling for the input box and send button */
+        .input-box {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #fff;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #send-button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5bc0de;
+            color: white;
+            cursor: pointer;
+        }
+
+        #send-button:hover {
+            background-color: #31b0d5;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <div class="input-box">
+            <input type="text" id="chat-input" placeholder="Type your message..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-button').addEventListener('click', function() {
+            sendMessage();
+        });
+
+        // Allow pressing "Enter" to send the message
+        document.getElementById('chat-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (message) {
+                // Create a new message element
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chat-message user';
+                messageElement.textContent = message;
+
+                // Append the message to the chat box
+                document.getElementById('chat-box').appendChild(messageElement);
+
+                // Simulate receiving a response from the expert
+                setTimeout(() => {
+                    const expertMessageElement = document.createElement('div');
+                    expertMessageElement.className = 'chat-message expert';
+                    expertMessageElement.textContent = "Expert's response to: " + message;
+                    document.getElementById('chat-box').appendChild(expertMessageElement);
+
+                    // Scroll to the bottom of the chat box
+                    document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+                }, 1000);
+
+                // Clear the input field
+                input.value = '';
+
+                // Scroll to the bottom of the chat box
+                document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+            }
+        }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
