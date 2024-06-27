@@ -6,6 +6,7 @@ import { setAuthToken, setStudentData } from "../../../redux/studentSlice";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { GoogleLogin } from "react-google-login";
 
 const StudentLogin = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,22 @@ const StudentLogin = () => {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      // Handle your Google OAuth login logic here
+      console.log(result, token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleFailure = (error) => {
+    console.log("Google Sign In was unsuccessful. Try again later.", error);
   };
 
   return (
@@ -109,7 +126,7 @@ const StudentLogin = () => {
               href="/studentforget"
               className="text-md font-medium text-white hover:text-green-700"
             >
-              Forget password?
+              Forgot password?
             </a>
             <motion.button
               type="submit"
@@ -127,7 +144,7 @@ const StudentLogin = () => {
           }`}
         >
           <h1 className="text-white text-2xl font-[serif]">
-            Do not have an account?
+            Don't have an account?
           </h1>
           <Link to="/studentsignup">
             <motion.button
@@ -139,6 +156,26 @@ const StudentLogin = () => {
               Sign up
             </motion.button>
           </Link>
+          <div className="mt-6">
+            <GoogleLogin
+              clientId="YOUR_GOOGLE_CLIENT_ID"
+              render={(renderProps) => (
+                <motion.button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  type="button"
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-all cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  Sign in with Google
+                </motion.button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
         </div>
       </motion.div>
     </div>
@@ -146,5 +183,3 @@ const StudentLogin = () => {
 };
 
 export default StudentLogin;
-
-

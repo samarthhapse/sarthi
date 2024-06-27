@@ -1,9 +1,11 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useTheme } from "../../providers/ThemeProvider";
-import image1  from "../../../assets/img1.png";
+import image1 from "../../../assets/img1.png";
+import { GoogleLogin } from "react-google-login";
+
 const ExpertSignup = () => {
   const { isDarkMode } = useTheme();
   const navigate = useNavigate();
@@ -80,17 +82,41 @@ const ExpertSignup = () => {
     avatarInputRef.current.click();
   };
 
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      // Handle your Google OAuth signup logic here
+      console.log(result, token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const googleFailure = (error) => {
+    console.log("Google Sign Up was unsuccessful. Try again later.", error);
+  };
+
   return (
-    <div className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${isDarkMode ? 'bg-custom-gradient text-black' :' bg-white '} `} >
-      <motion.div 
+    <div
+      className={`w-full min-h-screen flex items-center justify-center p-4 bg-cover bg-center ${
+        isDarkMode ? "bg-custom-gradient text-black" : " bg-white "
+      } `}
+    >
+      <motion.div
         className="w-[900px] flex rounded-lg shadow-lg overflow-hidden"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-       <div className={ `flex-[1.5] flex flex-col  p-10 ${isDarkMode ? ' bg-card-custom-gradient ' : ' bg-teal-500 text-black' }` }>
-          <motion.form 
-            onSubmit={handleSubmit} 
+        <div
+          className={`flex-[1.5] flex flex-col  p-10 ${
+            isDarkMode ? " bg-card-custom-gradient " : " bg-teal-500 text-black"
+          }`}
+        >
+          <motion.form
+            onSubmit={handleSubmit}
             className="flex flex-col items-center w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -197,7 +223,9 @@ const ExpertSignup = () => {
                     checked={inputs.expertise === "Bug solving"}
                     className="mr-2"
                   />
-                  <label htmlFor="bugSolving" className="mr-4">Bug solving</label>
+                  <label htmlFor="bugSolving" className="mr-4">
+                    Bug solving
+                  </label>
                 </div>
                 <div className="flex">
                   <input
@@ -209,7 +237,9 @@ const ExpertSignup = () => {
                     checked={inputs.expertise === "Tech career assistance"}
                     className="mr-2"
                   />
-                  <label htmlFor="techCareer" className="mr-4">Tech career assistance</label>
+                  <label htmlFor="techCareer" className="mr-4">
+                    Tech career assistance
+                  </label>
                 </div>
                 <div className="flex">
                   <input
@@ -225,7 +255,9 @@ const ExpertSignup = () => {
                 </div>
               </div>
             </div>
-            {error && <p className=" text-red-500 text-sm">{error}</p>}
+            {error && (
+              <p className=" text-red-500 text-sm">{error}</p>
+            )}
             <motion.button
               type="submit"
               className="mt-4 bg-teal-500 text-white font-bold text-md py-3 px-8 rounded-full transition-all hover:bg-teal-600"
@@ -236,12 +268,18 @@ const ExpertSignup = () => {
             </motion.button>
           </motion.form>
         </div>
-        <div className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${isDarkMode ? 'bg-card-custom-gradient' :' bg-teal-500 text-white'}`}>
-        <img src={image1}alt="Hello" height={300} width={300}/>
-          <h1 className="text-white text-2xl font-[serif]">Already a registered expert?</h1>
-          <Link to='/expertlogin'>
-            <motion.button 
-              type="button" 
+        <div
+          className={`flex-1 flex flex-col items-center justify-center bg-card-custom-gradient p-3 ${
+            isDarkMode ? "bg-card-custom-gradient" : " bg-teal-500 text-white"
+          }`}
+        >
+          <img src={image1} alt="Hello" height={300} width={300} />
+          <h1 className="text-white text-2xl font-[serif]">
+            Already a registered expert?
+          </h1>
+          <Link to="/expertlogin">
+            <motion.button
+              type="button"
               className="mt-6 bg-white text-teal-500 font-bold text-md py-2 px-6 rounded-full transition-all hover:bg-gray-100"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -249,6 +287,26 @@ const ExpertSignup = () => {
               Sign in
             </motion.button>
           </Link>
+          <div className="mt-6">
+            <GoogleLogin
+              clientId="YOUR_GOOGLE_CLIENT_ID"
+              render={(renderProps) => (
+                <motion.button
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  type="button"
+                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-all cursor-pointer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  Sign up with Google
+                </motion.button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
         </div>
       </motion.div>
     </div>
